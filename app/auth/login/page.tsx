@@ -112,7 +112,11 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">C</span>
+              <img src="\Lucid_Origin_a_dark_themed_logo_image_featuring_a_footprint_as_1.jpg" 
+            alt="Logo"
+            className="w-6 h-6 object-contain"
+            style={{ background: "transparent" }}
+            />
             </div>
             <span className="text-xl font-bold text-foreground">CareerPath</span>
           </div>
