@@ -93,6 +93,15 @@ export default function LandingPage() {
 
             {/* Right Visual */}
             <div className="relative h-96 lg:h-full min-h-96 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-border flex items-center justify-center overflow-hidden">
+            <div
+            className="relative h-96 lg:h-full min-h-96 rounded-2xl border border-border overflow-hidden"
+            >
+              <img
+                src="/artwork.png"
+                alt="Career Path Visual"
+                className="w-full h-full object-cover"
+             />
+            </div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
                   {/* Animated background elements */}
@@ -100,7 +109,7 @@ export default function LandingPage() {
                   <div className="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl"></div>
 
                   {/* Card mockup */}
-                  <div className="relative z-10 w-80 rounded-xl bg-card border border-border shadow-2xl p-6 space-y-4">
+                 {/* <div className="relative z-10 w-80 rounded-xl bg-card border border-border shadow-2xl p-6 space-y-4">
                     <div className="h-3 w-24 rounded-full bg-primary/30"></div>
                     <div className="space-y-2">
                       <div className="h-2 w-full rounded-full bg-muted"></div>
@@ -111,7 +120,7 @@ export default function LandingPage() {
                       <div className="h-12 rounded-lg bg-primary/20"></div>
                       <div className="h-12 rounded-lg bg-primary/20"></div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
