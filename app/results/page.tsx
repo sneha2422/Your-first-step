@@ -195,6 +195,282 @@ const careerPaths = {
       learningPaths: ["Branding Specialization", "Brand Management"],
     },
   ],
+  NLP: [
+    {
+      id: "nlp-engineer",
+      title: "Natural Language Processing (NLP) Engineer",
+      description: "Create systems that understand and process human language",
+      keySkills: ["Linguistics", "ML algorithms", "Python", "deep learning", "transformers"],
+      dailyWork: "Model training, text analysis, chatbot development, translation systems",
+      growthPath: "NLP Engineer → Senior NLP Engineer → NLP Architect → AI Research Lead",
+      salaryRange: "$110K - $190K",
+      growthPotential: "Very High",
+      learningPaths: [
+        "Natural Language Processing Specialization",
+        "TensorFlow Developer Professional Certificate",
+        "Computational Social Science Specialization",
+      ],
+    },
+  ],
+  CV: [
+    {
+      id: "cv-engineer",
+      title: "Computer Vision (CV) Engineer",
+      description: "Develop systems that understand and process visual information",
+      keySkills: ["Image processing", "neural networks", "PyTorch", "OpenCV", "deep learning"],
+      dailyWork: "Model development, image recognition, object detection, video analysis",
+      growthPath: "CV Engineer → Senior CV Engineer → Vision AI Lead → Research Director",
+      salaryRange: "$115K - $195K",
+      growthPotential: "Very High",
+      learningPaths: [
+        "Deep Learning for Computer Vision Specialization",
+        "Advanced Computer Vision with TensorFlow",
+        "Applied ML in Python",
+        "Computer Vision for Engineering and Science Specialization",
+      ],
+    },
+  ],
+  RL: [
+    {
+      id: "rl-engineer",
+      title: "Reinforcement Learning (RL) Engineer",
+      description: "Build systems that learn through interaction and feedback",
+      keySkills: ["Mathematics", "Python", "optimization theory", "robotics", "game theory"],
+      dailyWork: "Agent development, simulation design, policy optimization",
+      growthPath: "RL Engineer → Senior RL Engineer → RL Research Scientist → AI Director",
+      salaryRange: "$120K - $210K",
+      growthPotential: "Very High",
+      learningPaths: ["Deep Learning and Reinforcement Learning", "Advanced Game Theory", "Modern Robotics Specialization"],
+    },
+  ],
+  AIE: [
+    {
+      id: "ai-ethics",
+      title: "AI Ethics and Governance Specialist",
+      description: "Ensure responsible AI development and deployment",
+      keySkills: ["Ethics", "policy analysis", "risk assessment", "technical documentation"],
+      dailyWork: "Policy development, impact assessment, stakeholder collaboration",
+      growthPath: "AI Ethics Researcher → Policy Advisor → Ethics Director → Chief AI Officer",
+      salaryRange: "$90K - $170K",
+      growthPotential: "High",
+      learningPaths: ["AI Ethics Specialization", "Technology Policy", "Responsible AI for Developers Specialization"],
+    },
+  ],
+  TP: [
+    {
+      id: "traditional-pm",
+      title: "Traditional Project Management",
+      description: "Focus on structured project planning and execution using established methodologies.",
+      keySkills: ["Project planning", "Risk management", "Scope management", "Budgeting"],
+      dailyWork: "Creating project plans, managing resources, tracking progress, ensuring deliverables.",
+      growthPath: "Project Coordinator → Project Manager → Senior PM → Program Manager",
+      salaryRange: "$80K - $150K",
+      growthPotential: "High",
+      learningPaths: [
+        "PMI-PMP Certification Training Course Specialization",
+        "Google Project Management Professional Certificate",
+        "Practice Exam for CAPM Certification",
+      ],
+    },
+  ],
+  AG: [
+    {
+      id: "agile-pm",
+      title: "Agile Project Management",
+      description: "Lead iterative, adaptive projects using Agile frameworks.",
+      keySkills: ["Scrum/Kanban", "Sprint planning", "Agile", "Continuous improvement"],
+      dailyWork: "Sprint management, team facilitation, removing blockers, delivering incremental value.",
+      growthPath: "Scrum Master → Agile Coach → Agile Transformation Lead",
+      salaryRange: "$95K - $175K",
+      growthPotential: "Very High",
+      learningPaths: ["Scrum Master Certification Specialization", "Agile Leadership Specialization", "Agile Project Management"],
+    },
+  ],
+  ST: [
+    {
+      id: "strategic-pm",
+      title: "Strategic Project Management",
+      description: "Align projects with organizational strategy and business objectives.",
+      keySkills: ["Portfolio management", "Strategic planning", "Business analysis", "ROI optimization"],
+      dailyWork: "Portfolio prioritization, resource optimization, strategic alignment.",
+      growthPath: "Strategic Project Manager → Portfolio Manager → PMO Director",
+      salaryRange: "$110K - $190K",
+      growthPotential: "Very High",
+      learningPaths: [
+        "Program Management Professional PMI-PgMP Certification Prep Specialization",
+        "Strategic Leadership and Management Specialization",
+        "Business Strategy Specialization",
+      ],
+    },
+  ],
+  UR: [
+    {
+      id: "ux-research",
+      title: "UX Research",
+      description: "Understand user behaviors, needs, and motivations.",
+      keySkills: ["Qualitative research methods", "User interviewing", "Usability testing", "Research synthesis"],
+      dailyWork: "Conducting user interviews, running usability studies, creating research plans, presenting findings.",
+      growthPath: "UX Researcher → Senior UX Researcher → Research Lead → Head of User Research",
+      salaryRange: "$90K - $160K",
+      growthPotential: "High",
+      learningPaths: [
+        "Google UX Design Professional Certificate",
+        "User Experience Research and Design Specialization",
+        "Qualitative Research Methods",
+      ],
+    },
+  ],
+  IX: [
+    {
+      id: "interaction-design",
+      title: "Interaction Design (IX)",
+      description: "Design how users interact with products and services.",
+      keySkills: ["User flows", "Information architecture", "Interaction patterns", "Wireframing", "Prototyping"],
+      dailyWork: "Creating user flows, designing interactions, building wireframes, prototyping solutions.",
+      growthPath: "Interaction Designer → Senior IxD → Lead Interaction Designer → Product Design Director",
+      salaryRange: "$95K - $170K",
+      growthPotential: "High",
+      learningPaths: ["Interaction Design Specialization", "Web Design: Strategy and Information Architecture"],
+    },
+  ],
+  SA: [
+    {
+      id: "ux-analytics",
+      title: "UX Analytics",
+      description: "Measure and optimize user experience through data.",
+      keySkills: ["Quantitative analysis", "A/B testing", "User behavior analytics", "Data visualization"],
+      dailyWork: "Analyzing user metrics, running A/B tests, creating dashboards, making data-driven recommendations.",
+      growthPath: "UX Analyst → Senior Analytics Designer → Analytics Lead → Head of UX Analytics",
+      salaryRange: "$100K - $180K",
+      growthPotential: "Very High",
+      learningPaths: [
+        "Google Analytics Professional Certificate",
+        "Meta Data Analyst Professional Certificate",
+        "Quantitative Research",
+      ],
+    },
+  ],
+  TC_PM: [
+    {
+      id: "technical-pm",
+      title: "Technical Product Management Path (TC)",
+      description: "Lead technical product development and engineering collaboration.",
+      keySkills: ["Technical architecture", "API design", "System integration"],
+      dailyWork: "Technical specifications, feature planning, engineering coordination.",
+      growthPath: "Technical PM → Senior Technical PM → Director of Technical Product",
+      salaryRange: "$130K - $220K",
+      growthPotential: "Very High",
+      learningPaths: ["Software Product Management Specialization", "API Product Management", "Cloud Architecture Fundamentals"],
+    },
+  ],
+  BU: [
+    {
+      id: "growth-pm",
+      title: "Growth Product Management Path (BU)",
+      description: "Drive product growth and business metrics.",
+      keySkills: ["Analytics", "A/B testing", "Monetization strategy"],
+      dailyWork: "Growth experiments, metric analysis, revenue optimization.",
+      growthPath: "Growth PM → Senior Growth PM → Head of Growth",
+      salaryRange: "$120K - $200K",
+      growthPotential: "Very High",
+      learningPaths: ["Product Analytics and AI", "Business Growth Strategies", "Strategic Product Development"],
+    },
+  ],
+  CX: [
+    {
+      id: "consumer-pm",
+      title: "Consumer Product Management Path (CX)",
+      description: "Create exceptional user experiences.",
+      keySkills: ["User research", "UX design", "Behavioral analytics"],
+      dailyWork: "Feature development, user testing, experience optimization.",
+      growthPath: "Product Manager → Senior PM → Director of Product",
+      salaryRange: "$110K - $190K",
+      growthPotential: "High",
+      learningPaths: [
+        "User Experience Research & Design Specialization",
+        "Market Research and Consumer Behavior",
+        "Product Ideation, Design, and Management Specialization",
+      ],
+    },
+  ],
+  ST_PM: [
+    {
+      id: "strategic-pm-path",
+      title: "Strategic Product Management Path (ST)",
+      description: "Define product vision and strategy.",
+      keySkills: ["Market analysis", "Strategic planning", "Stakeholder management"],
+      dailyWork: "Roadmap planning, competitive analysis, strategic initiatives.",
+      growthPath: "Strategic PM → Senior PM → VP of Product",
+      salaryRange: "$140K - $230K",
+      growthPotential: "Very High",
+      learningPaths: ["Strategic Product Development", "Strategic Leadership and Management Specialization"],
+    },
+  ],
+  UI_DESIGN: [
+    {
+      id: "ui-design-path",
+      title: "UI Design Path (UI)",
+      description: "Create visually appealing and intuitive interfaces.",
+      keySkills: ["Visual design principles", "Typography", "Color theory", "Prototyping tools (Figma, Sketch)"],
+      dailyWork: "Creating UI mockups, Maintaining design systems, Visual design iteration, Collaborating with developers.",
+      growthPath: "Junior UI Designer → Senior UI Designer → Lead Designer → Design Director",
+      salaryRange: "$80K - $150K",
+      growthPotential: "High",
+      learningPaths: ["UI/UX Design Specialization", "Design Fundamentals", "Create High-Fidelity Designs and Prototypes in Figma"],
+    },
+  ],
+  FE: [
+    {
+      id: "frontend-dev-path",
+      title: "Frontend Development Path (FE)",
+      description: "Create engaging user interfaces and interactions.",
+      keySkills: ["HTML5", "CSS3", "JavaScript", "Frontend frameworks (React/Vue/Angular)"],
+      dailyWork: "UI implementation, responsive design, frontend optimization.",
+      growthPath: "Junior Frontend Developer → Senior Frontend Developer → Frontend Architect",
+      salaryRange: "$90K - $170K",
+      growthPotential: "Very High",
+      learningPaths: ["Frontend Web Development Specialization", "React Basics", "Meta Front-End Developer Professional Certificate"],
+    },
+  ],
+  BE: [
+    {
+      id: "backend-dev-path",
+      title: "Backend Development Path (BE)",
+      description: "Build server-side applications and systems.",
+      keySkills: ["Server-side languages (Node.js/Python/Java)", "Databases", "APIs"],
+      dailyWork: "API development, database design, server optimization.",
+      growthPath: "Backend Developer → Senior Backend Engineer → Solutions Architect",
+      salaryRange: "$100K - $180K",
+      growthPotential: "Very High",
+      learningPaths: ["IBM Back-End Development Professional Certificate", "Meta Back-End Developer Professional Certificate", "Cloud Computing Specialization"],
+    },
+  ],
+  FS: [
+    {
+      id: "fullstack-dev-path",
+      title: "Full Stack Development Path (FS)",
+      description: "Handle end-to-end web application development.",
+      keySkills: ["Frontend + Backend technologies", "DevOps", "System architecture"],
+      dailyWork: "Full application development, deployment, maintenance.",
+      growthPath: "Full Stack Developer → Senior Full Stack Engineer → Technical Lead",
+      salaryRange: "$110K - $200K",
+      growthPotential: "Very High",
+      learningPaths: ["IBM Full Stack Software Developer Professional Certificate", "IBM DevOps and Software Engineering Professional Certificate"],
+    },
+  ],
+  DE_WEB: [
+    {
+      id: "ui-ux-dev-path",
+      title: "UI/UX Development Path (DE)",
+      description: "Create user-centered design solutions.",
+      keySkills: ["UI design principles", "UX research", "Frontend development"],
+      dailyWork: "Prototyping, user testing, design implementation.",
+      growthPath: "UI Developer → Senior UI/UX Developer → Design Systems Engineer",
+      salaryRange: "$95K - $175K",
+      growthPotential: "High",
+      learningPaths: ["UI/UX Design Specialization", "Design Thinking Specialization", "Web Accessibility Fundamentals"],
+    },
+  ],
 }
 
 const domainNames: Record<string, string> = {
@@ -204,13 +480,62 @@ const domainNames: Record<string, string> = {
   CD: "Creative",
   ED: "Engineering",
   MC: "Marketing",
+  NLP: "Natural Language Processing",
+  CV: "Computer Vision",
+  RL: "Reinforcement Learning",
+  AIE: "AI Ethics & Governance",
+  OF: "Offensive Security",
+  DF: "Defensive Security",
+  IR: "Incident Response",
+  GC: "Governance & Compliance",
+  DA: "Data Analysis",
+  ML: "Machine Learning",
+  DE: "Data Engineering",
+  BI: "Business Intelligence",
+  BR: "Brand Design",
+  UI: "UI/UX Design",
+  IL: "Illustration",
+  ID: "Industrial Design",
+  CM: "Content Marketing",
+  SM: "Social Media Marketing",
+  PPC: "Paid Advertising",
+  SEO: "Search Engine Optimization",
+  TP: "Traditional Project Management",
+  AG: "Agile Project Management",
+  TC_PM: "Technical Product Management",
+  BU: "Growth Product Management",
+  CX: "Consumer Product Management",
+  ST_PM: "Strategic Product Management",
+  UR: "UX Research",
+  IX: "Interaction Design",
+  UI_DESIGN: "UI Design",
+  SA: "UX Analytics",
+  FE: "Frontend Development",
+  BE: "Backend Development",
+  FS: "Full Stack Development",
+  DE_WEB: "UI/UX Development",
 }
 
 export default function ResultsPage() {
-  const [selectedDomain, setSelectedDomain] = useState<string>("TC")
-  const [selectedCareer, setSelectedCareer] = useState<any>(careerPaths.TC[0])
+  const [selectedDomain, setSelectedDomain] = useState<keyof typeof careerPaths>("TC")
+  const [selectedCareer, setSelectedCareer] = useState<(typeof careerPaths)[keyof typeof careerPaths][number]>(
+    careerPaths.TC[0],
+  )
 
-  const careers = careerPaths[selectedDomain as keyof typeof careerPaths] || []
+  const careers = careerPaths[selectedDomain] || []
+
+  const handleDomainSelect = (key: string) => {
+    const domainKey = key as keyof typeof careerPaths
+    const careerList = careerPaths[domainKey]
+    if (careerList && careerList.length > 0) {
+      setSelectedDomain(domainKey)
+      setSelectedCareer(careerList[0])
+    } else {
+      // Fallback if a domain has no careers defined (should not happen with current data)
+      setSelectedDomain("TC")
+      setSelectedCareer(careerPaths.TC[0])
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background">
@@ -245,10 +570,7 @@ export default function ResultsPage() {
             {Object.entries(domainNames).map(([key, name]) => (
               <button
                 key={key}
-                onClick={() => {
-                  setSelectedDomain(key)
-                  setSelectedCareer(careerPaths[key as keyof typeof careerPaths][0])
-                }}
+                onClick={() => handleDomainSelect(key)}
                 className={`p-4 rounded-lg border-2 transition-all font-medium ${
                   selectedDomain === key
                     ? "border-primary bg-primary/10 text-foreground"
@@ -266,7 +588,7 @@ export default function ResultsPage() {
           {/* Left: Career List */}
           <div className="lg:col-span-1">
             <h3 className="text-lg font-bold text-foreground mb-4">Career Paths</h3>
-            <div className="space-y-2">
+            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2">
               {careers.map((career: any) => (
                 <button
                   key={career.id}
