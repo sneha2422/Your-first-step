@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { TrendingUp, Briefcase, ArrowRight, Download, Share2, BookOpen, CheckCircle } from "lucide-react"
@@ -517,7 +517,7 @@ const domainNames: Record<string, string> = {
   DE_WEB: "UI/UX Development",
 }
 
-export default function ResultsPage() {
+function ResultsContent() {
   const searchParams = useSearchParams()
   const topDomainFromParams = searchParams.get("topDomain") as keyof typeof careerPaths | null
 
@@ -722,5 +722,14 @@ export default function ResultsPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ResultsPage() {
+  return (
+    // Wrap the component that uses `useSearchParams` in a Suspense boundary
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultsContent />
+    </Suspense>
   )
 }
