@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { TrendingUp, Briefcase, ArrowRight, Download, Share2, BookOpen, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -517,12 +518,25 @@ const domainNames: Record<string, string> = {
 }
 
 export default function ResultsPage() {
-  const [selectedDomain, setSelectedDomain] = useState<keyof typeof careerPaths>("TC")
+  const searchParams = useSearchParams()
+  const topDomainFromParams = searchParams.get("topDomain") as keyof typeof careerPaths | null
+
+  const [selectedDomain, setSelectedDomain] = useState<keyof typeof careerPaths>(topDomainFromParams || "TC")
   const [selectedCareer, setSelectedCareer] = useState<(typeof careerPaths)[keyof typeof careerPaths][number]>(
-    careerPaths.TC[0],
+    careerPaths[topDomainFromParams || "TC"][0],
   )
 
   const careers = careerPaths[selectedDomain] || []
+
+  useEffect(() => {
+    if (topDomainFromParams && careerPaths[topDomainFromParams]) {
+      setSelectedDomain(topDomainFromParams)
+      setSelectedCareer(careerPaths[topDomainFromParams][0])
+    }
+  }, [topDomainFromParams])
+
+  const topDomainName = topDomainFromParams ? domainNames[topDomainFromParams] : null
+  const topCareer = topDomainFromParams ? careerPaths[topDomainFromParams]?.[0] : null
 
   const handleDomainSelect = (key: string) => {
     const domainKey = key as keyof typeof careerPaths
@@ -538,7 +552,7 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-background">
+    <div className="min-h-screen bg-linear-to-br from-background to-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -563,6 +577,16 @@ export default function ResultsPage() {
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        {topDomainName && topCareer && (
+          <div className="mb-12 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Your Personalized Recommendation</h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              Based on your assessment, your strongest alignment is with the{" "}
+              <span className="font-bold text-primary">{topDomainName}</span> domain. A career path like{" "}
+              <span className="font-bold text-primary">{topCareer.title}</span> could be an excellent fit for you, offering great potential for progress and satisfaction.
+            </p>
+          </div>
+        )}
         {/* Domain Selection */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-6">Select a Domain</h2>
@@ -652,7 +676,7 @@ export default function ResultsPage() {
                 <div className="space-y-2">
                   {selectedCareer.learningPaths.map((path: string) => (
                     <div key={path} className="flex items-start gap-3 p-3 rounded-lg border border-border">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                       <span className="text-sm text-foreground">{path}</span>
                     </div>
                   ))}

@@ -1643,12 +1643,7 @@ const domainRecommendations = {
     ED: "Your profile points to a talent for building and designing systems. You might find a fulfilling career in engineering, such as software engineering, data engineering, or system architecture.",
     MC: "You seem to have a knack for communication and understanding market trends. A career in marketing, public relations, or sales could be a perfect match.",
   },
-  ai: {
-    NLP: "You have a strong interest in language and communication. A career in Natural Language Processing, working on chatbots, translation, or sentiment analysis, would be a great fit.",
-    CV: "Your profile points to a talent for visual pattern recognition. Consider a career in Computer Vision, working on image recognition, autonomous vehicles, or medical imaging.",
-    RL: "You enjoy optimizing decision-making processes. A career in Reinforcement Learning, working on robotics, game AI, or resource management, would be exciting for you.",
-    AIE: "You are interested in the broader societal impact of AI. A career in AI Ethics & Governance, ensuring fairness, transparency, and accountability, would be a perfect match.",
-  },
+  // Recommendations for other quizzes can be added here
   cybersecurity: {
     OF: "You enjoy thinking like an attacker to find and fix vulnerabilities. A career in Offensive Security, like a Penetration Tester or Ethical Hacker, could be exciting for you.",
     DF: "Your detail-oriented and preventative mindset is perfect for Defensive Security. Consider roles like Security Analyst or Network Security Engineer.",
@@ -1661,66 +1656,24 @@ const domainRecommendations = {
     DE: "You enjoy organizing and structuring data systems. A career in Data Engineering would be a perfect match for you.",
     BI: "You excel at creating clear visualizations and helping others understand data. A role in Business Intelligence would be ideal.",
   },
-  "digital-marketing": {
-    CM: "You have a creative flair for storytelling and brand messaging. A career in Content Marketing, creating blog posts, videos, and podcasts, would be a great fit.",
-    SM: "You are passionate about building communities and engaging with audiences. A career in Social Media Marketing would be a perfect match.",
-    PPC: "You are analytical and enjoy optimizing campaigns for performance. A career in Paid Advertising (PPC), managing Google Ads or social media ads, would be exciting.",
-    SEO: "You are technical and detail-oriented, with an interest in how search engines work. A career in Search Engine Optimization (SEO) would suit you well.",
-  },
-  "graphic-design": {
-    BR: "You have a talent for creating strong visual identities. A career in Brand Design, working on logos, style guides, and brand strategy, would be a great fit.",
-    UI: "You enjoy making digital products easy and enjoyable to use. A career as a UI/UX Designer, working on websites and mobile apps, would be a perfect match.",
-    IL: "You are artistic and love telling stories through visuals. A career in Illustration, creating custom graphics for books, websites, or marketing, would be exciting.",
-    ID: "You are interested in how design translates to physical products. A career in Industrial Design, working on packaging and product design, would suit you well.",
-  },
-  "machine-learning": {
-    MLE: "You enjoy building and optimizing complex systems. A career as a Machine Learning Engineer, deploying models to production, would be a great fit.",
-    DS: "You like finding actionable insights in data to solve real-world problems. A career as a Data Scientist would be a perfect match.",
-    RA: "You are passionate about advancing the field through research. A career in an academic or research-focused role would be exciting.",
-    DA_ML: "You excel at making data meaningful to others. A role as a Data Analyst with a focus on machine learning would suit you well.",
-  },
-  "product-management": {
-    TC_PM: "You have a strong technical background and enjoy working with engineering teams. A career as a Technical Product Manager would be a great fit.",
-    BU: "You are business-savvy and enjoy analyzing market data. A career as a Growth Product Manager, focusing on user acquisition and revenue, would be a perfect match.",
-    CX: "You are passionate about understanding user needs and creating great experiences. A career as a Consumer Product Manager would be exciting.",
-    ST_PM: "You enjoy thinking long-term and shaping product vision. A career as a Strategic Product Manager would suit you well.",
-  },
-  "project-management": {
-    TP: "You are organized and enjoy creating detailed project plans. A career in Traditional Project Management would be a great fit.",
-    AG: "You are adaptable and enjoy leading fast-paced, innovative projects. A career in Agile Project Management would be a perfect match.",
-    TC: "You excel at building strong teams and fostering collaboration. A career in Team Leadership or as a Scrum Master would be exciting.",
-    ST: "You are a strategic thinker and enjoy aligning projects with business objectives. A career in Strategic Management or as a Program Manager would suit you well.",
-  },
-  ux: {
-    UR: "You are curious about people's motivations and enjoy conducting user research. A career as a UX Researcher would be a great fit.",
-    UI_DESIGN: "You have a strong sense of visual design and enjoy creating beautiful interfaces. A career as a UI Designer would be a perfect match.",
-    IX: "You enjoy solving complex interaction problems and designing seamless user flows. A career as an Interaction Designer would be exciting.",
-    SA: "You love working with data and metrics to improve product performance. A career as a UX Analyst would suit you well.",
-  },
-  "web-development": {
-    FE: "You have an eye for detail and enjoy creating beautiful, interactive user experiences. A career in Frontend Development would be a great fit.",
-    BE: "You enjoy solving complex logic problems and working on behind-the-scenes systems. A career in Backend Development would be a perfect match.",
-    FS: "You like to understand systems as a whole and enjoy working on both the frontend and backend. A career as a Full Stack Developer would be exciting.",
-    DE_WEB: "You are good at putting yourself in others' shoes and making technology more accessible. A career as a UI/UX Developer would suit you well.",
-  },
 }
 
 export default function AssessmentPage() {
   const [selectedQuiz, setSelectedQuiz] = useState<string | null>(null)
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers] = useState<Record<number, number>>({})
+  const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false)
 
-  const questions = selectedQuiz ? quizData[selectedQuiz as keyof typeof quizData]?.questions || [] : []
+  const questions = selectedQuiz ? (quizData[selectedQuiz] && quizData[selectedQuiz].questions) || [] : []
 
-  const handleStartQuiz = (quizId: string) => {
+  const handleStartQuiz = (quizId) => {
     setSelectedQuiz(quizId)
     setCurrentQuestion(0)
     setAnswers({})
     setShowResults(false)
   }
 
-  const handleAnswer = (optionIndex: number) => {
+  const handleAnswer = (optionIndex) => {
     setAnswers((prev) => ({ ...prev, [questions[currentQuestion].id]: optionIndex }))
   }
 
@@ -1750,13 +1703,13 @@ export default function AssessmentPage() {
   // Calculate domain scores
   const calculateDomainScores = () => {
     if (!selectedQuiz) return {}
-    const currentQuizData = quizData[selectedQuiz as keyof typeof quizData]
+    const currentQuizData = quizData[selectedQuiz]
     if (!currentQuizData) return {}
 
-    const domainScores: Record<string, number> = Object.keys(currentQuizData.domains).reduce((acc, key) => {
+    const domainScores = Object.keys(currentQuizData.domains).reduce((acc, key) => {
       acc[key] = 0
       return acc
-    }, {} as Record<string, number>)
+    }, {})
 
     Object.entries(answers).forEach(([questionId, optionIndex]) => {
       const question = questions.find((q) => q.id === Number.parseInt(questionId))
@@ -1769,9 +1722,9 @@ export default function AssessmentPage() {
     return domainScores
   }
 
-  const currentQuizDetails = selectedQuiz ? quizData[selectedQuiz as keyof typeof quizData] : null
+  const currentQuizDetails = selectedQuiz ? quizData[selectedQuiz] : null
   const totalQuestions = questions.length
-  const domainNames: Record<string, string> = currentQuizDetails?.domains || {}
+  const domainNames = currentQuizDetails?.domains || {}
 
   if (!selectedQuiz) {
     return (
@@ -1882,9 +1835,19 @@ export default function AssessmentPage() {
   if (showResults) {
     const domainScores = calculateDomainScores()
     const sortedDomains = Object.entries(domainScores).sort(([, a], [, b]) => b - a)
-    const topDomain = sortedDomains[0]?.[0]
+    const topDomain = sortedDomains.length > 0 ? sortedDomains[0][0] : null
 
-    const resultsUrl = topDomain ? `/results?topDomain=${topDomain}` : "/results"
+    const getRecommendation = () => {
+      if (!selectedQuiz || !topDomain) return null
+
+      const recommendationsForQuiz = domainRecommendations[selectedQuiz]
+      if (!recommendationsForQuiz) return null
+
+      // @ts-ignore
+      return recommendationsForQuiz[topDomain] || null
+    }
+
+    const recommendation = getRecommendation()
 
     return (
       <div className="min-h-screen bg-linear-to-b from-background to-background">
@@ -1892,33 +1855,38 @@ export default function AssessmentPage() {
           <Button variant="outline" onClick={handleBackToQuizzes} className="mb-8 bg-transparent">
             Back to Quizzes
           </Button>
+
           <div className="rounded-xl border border-border bg-card p-8 mb-8">
             <h2 className="text-3xl font-bold text-foreground mb-2">Your Assessment Results</h2>
             <p className="text-muted-foreground mb-8">Based on your answers, here's your domain profile:</p>
 
+            {recommendation && (
+              <div className="mb-8 p-4 bg-primary/10 border-l-4 border-primary rounded-r-lg">
+                <h3 className="font-bold text-primary mb-2">Recommendation</h3>
+                <p className="text-foreground">{recommendation}</p>
+              </div>
+            )}
+
             <div className="space-y-6">
               {sortedDomains.map(([domain, score]) => (
                 <div key={domain}>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-base font-medium text-foreground">{domainNames[domain]}</span>
-                    <span className="text-sm font-medium text-foreground">{Math.round((score / totalQuestions) * 100)}%</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-foreground">{domainNames[domain]}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {score}/{totalQuestions}
+                    </span>
                   </div>
-                  <div className="w-full bg-muted rounded-full h-2.5">
+                  <div className="h-3 rounded-full bg-muted overflow-hidden">
                     <div
-                      className="bg-primary h-2.5 rounded-full"
+                      className="h-full bg-primary transition-all duration-500"
                       style={{ width: `${(score / totalQuestions) * 100}%` }}
                     ></div>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {(domainRecommendations[selectedQuiz as keyof typeof domainRecommendations] as
-                      | Record<string, string>
-                      | undefined)?.[domain]}
-                  </p>
                 </div>
               ))}
             </div>
 
-            <Link href={resultsUrl} className="block mt-8">
+            <Link href="/results" className="block mt-8">
               <Button className="w-full">
                 View Detailed Career Recommendations
                 <ArrowRight className="ml-2 h-4 w-4" />

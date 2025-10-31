@@ -228,7 +228,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right Side - Visual */}
-      <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-primary/10 to-primary/5 px-8 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-center items-center bg-linear-to-br from-primary/10 to-primary/5 px-8 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-20 right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl"></div>
         <div className="absolute bottom-20 left-20 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
@@ -248,7 +248,7 @@ export default function SignupPage() {
           {/* Security Features */}
           <div className="space-y-4 text-left">
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>
@@ -257,7 +257,7 @@ export default function SignupPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>
@@ -266,7 +266,7 @@ export default function SignupPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>

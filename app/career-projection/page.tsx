@@ -119,7 +119,7 @@ export default function CareerProjectionPage() {
                 key={idx}
                 className="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-primary/50 transition"
               >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10">
                     <span className="text-sm font-bold text-primary">Year {milestone.year}</span>
                   </div>

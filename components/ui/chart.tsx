@@ -104,28 +104,39 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
-function ChartTooltipContent({
-  active,
-  payload,
-  className,
-  indicator = 'dot',
-  hideLabel = false,
-  hideIndicator = false,
-  label,
-  labelFormatter,
-  labelClassName,
-  formatter,
-  color,
-  nameKey,
-  labelKey,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<'div'> & {
+function ChartTooltipContent(
+  props: React.ComponentProps<'div'> & {
+    active?: boolean
+    payload?: any[]
     hideLabel?: boolean
     hideIndicator?: boolean
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
-  }) {
+    label?: any
+    labelFormatter?: any
+    labelClassName?: string
+    formatter?: any
+    color?: string
+    className?: string
+  }
+) {
+  const {
+    active,
+    payload,
+    className,
+    indicator = 'dot',
+    hideLabel = false,
+    hideIndicator = false,
+    label,
+    labelFormatter,
+    labelClassName,
+    formatter,
+    color,
+    nameKey,
+    labelKey,
+    ...rest
+  } = props
   const { config } = useChart()
 
   const tooltipLabel = React.useMemo(() => {
@@ -173,7 +184,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        'border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl',
+        'border-border/50 bg-background grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl',
         className,
       )}
     >
@@ -257,7 +268,9 @@ function ChartLegendContent({
   verticalAlign = 'bottom',
   nameKey,
 }: React.ComponentProps<'div'> &
-  Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
+  {
+    payload?: { dataKey?: string; value?: string; color?: string }[]
+    verticalAlign?: 'top' | 'bottom' | 'middle'
     hideIcon?: boolean
     nameKey?: string
   }) {
