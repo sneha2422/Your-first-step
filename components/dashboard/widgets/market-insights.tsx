@@ -23,7 +23,7 @@ export default function MarketInsightsWidget() {
       <div className="space-y-3">
         {insights.map((insight) => (
           <div key={insight.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-            <TrendingUp className="h-4 w-4 text-primary flex-shrink-0" />
+            <TrendingUp className="h-4 w-4 text-primary shrink-0" />
             <p className="text-sm text-foreground">{insight.title}</p>
           </div>
         ))}

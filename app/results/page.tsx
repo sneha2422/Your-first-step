@@ -884,7 +884,7 @@ function ResultsContent() {
                 </div>
               </div>
 
-              <Link href="/dashboard">
+              <Link href={`/dashboard?course=${selectedCareer.id}`}>
                 <Button className="w-full">
                   Explore Learning Resources
                   <ArrowRight className="ml-2 h-4 w-4" />

@@ -7,7 +7,7 @@ export default function DashboardHeader() {
   const userRole = typeof window !== "undefined" ? localStorage.getItem("userRole") || "Career Seeker" : "Career Seeker"
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
+    <header className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-40">
       <div className="px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="hidden lg:block">

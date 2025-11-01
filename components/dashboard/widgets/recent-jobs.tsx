@@ -51,7 +51,7 @@ export default function RecentJobsWidget() {
             key={job.id}
             className="flex items-start gap-4 p-4 rounded-lg border border-border hover:border-primary/50 transition"
           >
-            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
               <Briefcase className="h-5 w-5 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
@@ -68,7 +68,7 @@ export default function RecentJobsWidget() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">{job.match}%</span>
             </div>
           </div>
