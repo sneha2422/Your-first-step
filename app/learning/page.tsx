@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Image from "next/image"
 import {
   BookOpen,
@@ -18,189 +18,298 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
-import { useLiveCourses } from "@/hooks/use-live-data"
+import { useSearchParams } from "next/navigation"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
 
-const localCourses = [
-  {
-    id: 1,
-    title: "Advanced Product Strategy",
-    instructor: "Sarah Chen",
-    category: "Product Management",
-    level: "Advanced",
-    duration: "8 weeks",
-    students: 2400,
-    rating: 4.9,
-    progress: 75,
-    status: "in-progress",
-    skills: ["Strategy", "Leadership", "Analytics"],
-    recommended: true,
-    relevance: 95,
-    image: "/product-management-course.png",
-    platform: "Coursera",
-    platformUrl: "https://www.coursera.org",
-  },
-  {
-    id: 2,
-    title: "Data-Driven Decision Making",
-    instructor: "Marcus Johnson",
-    category: "Analytics",
-    level: "Intermediate",
-    duration: "6 weeks",
-    students: 3100,
-    rating: 4.8,
-    progress: 100,
-    status: "completed",
-    skills: ["Data Analysis", "SQL", "Visualization"],
-    recommended: true,
-    relevance: 88,
-    image: "/udemy-product-course.jpg",
-    platform: "Udemy",
-    platformUrl: "https://www.udemy.com",
-  },
-  {
-    id: 3,
-    title: "Leadership for Managers",
-    instructor: "Emily Rodriguez",
-    category: "Leadership",
-    level: "Intermediate",
-    duration: "10 weeks",
-    students: 1800,
-    rating: 4.7,
-    progress: 30,
-    status: "in-progress",
-    skills: ["Team Management", "Communication", "Delegation"],
-    recommended: true,
-    relevance: 92,
-    image: "/google-pm-certificate.jpg",
-    platform: "LinkedIn Learning",
-    platformUrl: "https://www.linkedin.com/learning",
-  },
-  {
-    id: 4,
-    title: "Product Design Fundamentals",
-    instructor: "Alex Kim",
-    category: "Design",
-    level: "Beginner",
-    duration: "5 weeks",
-    students: 4200,
-    rating: 4.9,
-    progress: 0,
-    status: "not-started",
-    skills: ["UX/UI", "Prototyping", "User Research"],
-    recommended: false,
-    relevance: 72,
-    image: "/product-management-course.png",
-    platform: "Coursera",
-    platformUrl: "https://www.coursera.org",
-  },
-  {
-    id: 5,
-    title: "SQL for Product Managers",
-    instructor: "David Lee",
-    category: "Technical",
-    level: "Beginner",
-    duration: "4 weeks",
-    students: 2800,
-    rating: 4.8,
-    progress: 0,
-    status: "not-started",
-    skills: ["SQL", "Databases", "Queries"],
-    recommended: true,
-    relevance: 85,
-    image: "/udemy-product-course.jpg",
-    platform: "Udemy",
-    platformUrl: "https://www.udemy.com",
-  },
-  {
-    id: 6,
-    title: "Growth Marketing Strategies",
-    instructor: "Lisa Wang",
-    category: "Marketing",
-    level: "Advanced",
-    duration: "7 weeks",
-    students: 1900,
-    rating: 4.6,
-    progress: 0,
-    status: "not-started",
-    skills: ["Growth", "Marketing", "Experimentation"],
-    recommended: false,
-    relevance: 78,
-    image: "/google-pm-certificate.jpg",
-    platform: "Google",
-    platformUrl: "https://www.google.com/learning",
-  },
-]
+type Course = {
+  id: number
+  title: string
+  instructor: string
+  category: string
+  level: string
+  duration: string
+  hours: number
+  students: number
+  rating: number
+  progress: number
+  status: "in-progress" | "completed" | "not-started"
+  skills: string[]
+  recommended: boolean
+  relevance: number
+  image: string
+  platform: string
+  platformUrl: string
+}
 
-const learningPaths = [
-  {
-    id: 1,
-    title: "Product Manager Mastery",
-    description: "Complete path to become a successful Product Manager",
-    courses: [1, 2, 3, 5],
-    duration: "24 weeks",
-    difficulty: "Advanced",
-    matchScore: 94,
-  },
-  {
-    id: 2,
-    title: "Data-Driven Leadership",
-    description: "Combine data skills with leadership capabilities",
-    courses: [2, 3, 5],
-    duration: "20 weeks",
-    difficulty: "Intermediate",
-    matchScore: 88,
-  },
-  {
-    id: 3,
-    title: "Strategic Thinking Essentials",
-    description: "Master strategic thinking and decision-making",
-    courses: [1, 3],
-    duration: "18 weeks",
-    difficulty: "Intermediate",
-    matchScore: 85,
-  },
-]
+type LearningPath = {
+  id: number
+  title: string
+  description: string
+  courses: number[]
+  duration: string
+  difficulty: string
+  matchScore: number
+}
+
+const allCoursesData: Record<string, Course[]> = {
+  default: [
+    {
+      id: 1,
+      title: "Advanced Product Strategy",
+      instructor: "Sarah Chen",
+      category: "Product Management",
+      level: "Advanced",
+      duration: "8 weeks",
+      hours: 32,
+      students: 2400,
+      rating: 4.9,
+      progress: 75,
+      status: "in-progress",
+      skills: ["Strategy", "Leadership", "Analytics"],
+      recommended: true,
+      relevance: 95,
+      image: "/product-management-course.png",
+      platform: "Coursera",
+      platformUrl: "https://www.coursera.org",
+    },
+    {
+      id: 2,
+      title: "Data-Driven Decision Making",
+      instructor: "Marcus Johnson",
+      category: "Analytics",
+      level: "Intermediate",
+      duration: "6 weeks",
+      hours: 24,
+      students: 3100,
+      rating: 4.8,
+      progress: 100,
+      status: "completed",
+      skills: ["Data Analysis", "SQL", "Visualization"],
+      recommended: true,
+      relevance: 88,
+      image: "/udemy-product-course.jpg",
+      platform: "Udemy",
+      platformUrl: "https://www.udemy.com",
+    },
+    {
+      id: 3,
+      title: "Leadership for Managers",
+      instructor: "Emily Rodriguez",
+      category: "Leadership",
+      level: "Intermediate",
+      duration: "10 weeks",
+      hours: 40,
+      students: 1800,
+      rating: 4.7,
+      progress: 30,
+      status: "in-progress",
+      skills: ["Team Management", "Communication", "Delegation"],
+      recommended: true,
+      relevance: 92,
+      image: "/google-pm-certificate.jpg",
+      platform: "LinkedIn Learning",
+      platformUrl: "https://www.linkedin.com/learning",
+    },
+  ],
+  "software-developer": [
+    {
+      id: 101,
+      title: "Meta Back-End Developer Professional Certificate",
+      instructor: "Meta",
+      category: "Backend",
+      level: "Beginner",
+      duration: "7 months",
+      hours: 120,
+      students: 15000,
+      rating: 4.8,
+      progress: 15,
+      status: "in-progress",
+      skills: ["Python", "Django", "APIs", "Databases"],
+      recommended: true,
+      relevance: 98,
+      image: "/product-management-course.png",
+      platform: "Coursera",
+      platformUrl: "https://www.coursera.org",
+    },
+    {
+      id: 102,
+      title: "IBM Full Stack Software Developer Professional Certificate",
+      instructor: "IBM",
+      category: "Full Stack",
+      level: "Intermediate",
+      duration: "10 months",
+      hours: 180,
+      students: 12000,
+      rating: 4.7,
+      progress: 0,
+      status: "not-started",
+      skills: ["React", "Node.js", "Cloud", "DevOps"],
+      recommended: true,
+      relevance: 95,
+      image: "/udemy-product-course.jpg",
+      platform: "Coursera",
+      platformUrl: "https://www.coursera.org",
+    },
+  ],
+  "data-analytics": [
+    {
+      id: 201,
+      title: "Google Data Analytics Professional Certificate",
+      instructor: "Google",
+      category: "Analytics",
+      level: "Beginner",
+      duration: "6 months",
+      hours: 100,
+      students: 50000,
+      rating: 4.9,
+      progress: 60,
+      status: "in-progress",
+      skills: ["SQL", "Tableau", "R", "Spreadsheets"],
+      recommended: true,
+      relevance: 99,
+      image: "/google-pm-certificate.jpg",
+      platform: "Coursera",
+      platformUrl: "https://www.coursera.org",
+    },
+    {
+      id: 202,
+      title: "IBM Data Science Professional Certificate",
+      instructor: "IBM",
+      category: "Data Science",
+      level: "Intermediate",
+      duration: "11 months",
+      hours: 200,
+      students: 25000,
+      rating: 4.7,
+      progress: 20,
+      status: "in-progress",
+      skills: ["Python", "Machine Learning", "Pandas"],
+      recommended: true,
+      relevance: 92,
+      image: "/product-management-course.png",
+      platform: "Coursera",
+      platformUrl: "https://www.coursera.org",
+    },
+  ],
+}
+
+const allLearningPathsData: Record<string, LearningPath[]> = {
+  default: [
+    {
+      id: 1,
+      title: "Product Manager Mastery",
+      description: "Complete path to become a successful Product Manager",
+      courses: [1, 2, 3],
+      duration: "24 weeks",
+      difficulty: "Advanced",
+      matchScore: 94,
+    },
+  ],
+  "software-developer": [
+    {
+      id: 101,
+      title: "Backend & Full Stack Developer Path",
+      description: "Become a versatile developer with backend and full stack skills.",
+      courses: [101, 102],
+      duration: "17 months",
+      difficulty: "Intermediate",
+      matchScore: 96,
+    },
+  ],
+  "data-analytics": [
+    {
+      id: 201,
+      title: "From Analyst to Data Scientist",
+      description: "Master data analytics and take the next step into data science.",
+      courses: [201, 202],
+      duration: "17 months",
+      difficulty: "Intermediate",
+      matchScore: 97,
+    },
+  ],
+}
 
 const capitalizeString = (str: string | undefined): string => {
   if (!str) return "Unknown"
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export default function LearningPage() {
+function LearningPageContent() {
   const [searchQuery, setSearchQuery] = useState("")
   const [filterCategory, setFilterCategory] = useState("all")
   const [filterStatus, setFilterStatus] = useState("all")
   const [selectedPath, setSelectedPath] = useState<number | null>(null)
-  const [allCourses, setAllCourses] = useState(localCourses)
-  const { courses: liveCourses, loading: liveLoading } = useLiveCourses()
+  const [courses, setCourses] = useState<Course[]>([])
+  const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
+  const [isUpdateCourseOpen, setUpdateCourseOpen] = useState(false)
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
+  const [updatedProgress, setUpdatedProgress] = useState(0)
+
+  const searchParams = useSearchParams()
+  const courseId = searchParams.get("course")
 
   useEffect(() => {
-    if (liveCourses && liveCourses.length > 0) {
-      const merged = [...localCourses, ...liveCourses.slice(0, 3)]
-      setAllCourses(merged)
-    }
-  }, [liveCourses])
+    const initialCourses = (courseId && allCoursesData[courseId]) || allCoursesData.default
+    const initialPaths = (courseId && allLearningPathsData[courseId]) || allLearningPathsData.default
+    setCourses(initialCourses)
+    setLearningPaths(initialPaths)
+  }, [courseId])
 
-  const categories = ["all", ...new Set(allCourses.map((c) => c.category).filter(Boolean))]
+  const handleUpdateProgress = () => {
+    if (selectedCourse) {
+      setCourses(
+        courses.map((c) =>
+          c.id === selectedCourse.id
+            ? {
+                ...c,
+                progress: updatedProgress,
+                status: updatedProgress === 100 ? "completed" : updatedProgress > 0 ? "in-progress" : "not-started",
+              }
+            : c,
+        ),
+      )
+      setUpdateCourseOpen(false)
+      setSelectedCourse(null)
+    }
+  }
+
+  const openUpdateDialog = (course: Course) => {
+    setSelectedCourse(course)
+    setUpdatedProgress(course.progress)
+    setUpdateCourseOpen(true)
+  }
+
+  const categories = ["all", ...new Set(courses.map((c) => c.category).filter(Boolean))]
   const statuses = ["all", "in-progress", "completed", "not-started"]
 
-  const filteredCourses = allCourses.filter((course) => {
+  const filteredCourses = courses.filter((course) => {
     const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory = filterCategory === "all" || course.category === filterCategory
     const matchesStatus = filterStatus === "all" || course.status === filterStatus
     return matchesSearch && matchesCategory && matchesStatus
   })
 
-  const recommendedCourses = allCourses.filter((c) => c.recommended).sort((a, b) => b.relevance - a.relevance)
+  const recommendedCourses = courses.filter((c) => c.recommended).sort((a, b) => b.relevance - a.relevance)
 
   const stats = {
-    inProgress: allCourses.filter((c) => c.status === "in-progress").length,
-    completed: allCourses.filter((c) => c.status === "completed").length,
-    totalHours: 156,
+    inProgress: courses.filter((c) => c.status === "in-progress").length,
+    completed: courses.filter((c) => c.status === "completed").length,
+    totalHours: Math.round(courses.reduce((sum, c) => sum + (c.progress / 100) * c.hours, 0)),
   }
 
-  const CourseCard = ({ course }: { course: any }) => (
-    <Card className="overflow-hidden hover:border-primary/50 transition flex flex-col">
+  const CourseCard = ({ course }: { course: Course }) => (
+    <Card
+      className="overflow-hidden hover:border-primary/50 transition flex flex-col cursor-pointer"
+      onClick={() => openUpdateDialog(course)}
+    >
       {/* Course Image */}
       {course.image && (
         <div className="relative h-40 w-full bg-muted overflow-hidden">
@@ -276,7 +385,7 @@ export default function LearningPage() {
         </div>
 
         {/* Progress */}
-        {course.progress !== undefined && course.progress > 0 && (
+        {course.progress !== undefined && (
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-medium text-foreground">Progress</span>
@@ -318,7 +427,7 @@ export default function LearningPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
+      <div className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-foreground mb-6">Learning Hub</h1>
 
@@ -416,14 +525,12 @@ export default function LearningPage() {
         <div className="mb-12">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-foreground mb-2">Recommended For You</h2>
-            <p className="text-muted-foreground">
-              Courses tailored to your career goals {liveLoading && "(Loading live data...)"}
-            </p>
+            <p className="text-muted-foreground">Courses tailored to your career goals</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recommendedCourses.map((course) => (
-              <div key={course.id} className="relative">
+              <div key={`${course.id}-${course.title}`} className="relative">
                 <CourseCard course={course} />
                 {course.relevance && (
                   <div className="absolute top-4 right-4 z-10 flex items-center gap-1 px-2 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
@@ -483,7 +590,7 @@ export default function LearningPage() {
         {/* Courses Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard key={`${course.id}-${course.title}`} course={course} />
           ))}
         </div>
 

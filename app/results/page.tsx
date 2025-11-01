@@ -465,20 +465,6 @@ const careerPaths = {
       learningPaths: ["Google Analytics Certification", "Moz/SEMrush SEO Certifications"],
     },
   ],
-  // Removed duplicate TP entry to resolve the error
-  AG: [
-    {
-      id: "agile-pm",
-      title: "Agile Project Management",
-      description: "Lead iterative, adaptive projects using Agile frameworks.",
-      keySkills: ["Scrum/Kanban", "Sprint planning", "Agile", "Continuous improvement"],
-      dailyWork: "Sprint management, team facilitation, removing blockers, delivering incremental value.",
-      growthPath: "Scrum Master → Agile Coach → Agile Transformation Lead",
-      salaryRange: "$95K - $175K",
-      growthPotential: "Very High",
-      learningPaths: ["Scrum Master Certification Specialization", "Agile Leadership Specialization", "Agile Project Management"],
-    },
-  ],
   ST: [
     {
       id: "strategic-pm",
@@ -496,7 +482,6 @@ const careerPaths = {
       ],
     },
   ],
-  // Removed duplicate IX entry to resolve the error
   SA: [
     {
       id: "ux-analytics",
@@ -527,7 +512,6 @@ const careerPaths = {
       learningPaths: ["Software Product Management Specialization", "API Product Management", "Cloud Architecture Fundamentals"],
     },
   ],
-  // Removed duplicate AG entry
   TP: [
     {
       id: "traditional-pm",
@@ -541,7 +525,6 @@ const careerPaths = {
       learningPaths: ["Project Management Professional (PMP) Certification", "Certified Associate in Project Management (CAPM)"],
     },
   ],
-  // Removed duplicate BU entry to resolve the error
   CX: [
     {
       id: "consumer-pm",
@@ -555,19 +538,6 @@ const careerPaths = {
       learningPaths: ["Product School Certifications", "Product Management courses/bootcamps"],
     },
   ],
-  ST_PM: [
-    {
-      id: "strategic-pm",
-      title: "Strategic Product Management",
-      description: "Focuses on long-term vision, market analysis, and defining the 'Why' and 'What' of a product portfolio rather than the day-to-day execution",
-      salaryRange: "$130K - $195K+",
-      growthPotential: "Very High",
-      growthPath: "Product Manager → Strategic Product Manager → Chief Product Officer (CPO)",
-      dailyWork: "Identifying new market opportunities, creating business cases, defining pricing and go-to-market strategies, long-term roadmap planning, executive communication",
-      keySkills: ["Financial Modeling", "Competitive Analysis", "Executive Communication", "Vision Setting", "Market Segmentation", "Negotiation"],
-      learningPaths: ["Master of Business Administration (MBA)", "Advanced Product Strategy courses"],
-    },
-  ],
   UR: [
     {
       id: "ux-research",
@@ -579,19 +549,6 @@ const careerPaths = {
       dailyWork: "Planning and conducting user interviews, usability tests, surveys, and field studies, analyzing qualitative and quantitative data, creating personas and journey maps",
       keySkills: ["Qualitative/Quantitative Research Methods", "Statistical Analysis", "Usability Testing", "Survey Design", "Data Synthesis"],
       learningPaths: ["Specialized Human-Computer Interaction (HCI) degrees", "Research Design courses"],
-    },
-  ],
-  IX: [
-    {
-      id: "interaction-design",
-      title: "Interaction Design",
-      description: "Designs the behavior and flow of interactive digital systems, focusing on how users navigate and engage with an interface",
-      salaryRange: "$90K - $140K",
-      growthPotential: "High",
-      growthPath: "Interaction Designer → Senior IXD → Principal Designer → UX Director",
-      dailyWork: "Defining interface behaviors (animations, feedback loops), creating detailed flow maps and prototypes, collaborating with engineers on technical feasibility",
-      keySkills: ["Prototyping (Principle/Figma)", "User Flows", "Motion Design Principles", "Cognitive Psychology", "Design Systems"],
-      learningPaths: ["Masters in Interaction Design", "specialized courses on prototyping tools"],
     },
   ],
   UI_DESIGN: [
