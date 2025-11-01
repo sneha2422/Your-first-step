@@ -56,7 +56,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left Side - Visual */}
-      <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-primary/10 to-primary/5 px-8 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-center items-center bg-linear-to-br from-primary/10 to-primary/5 px-8 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-20 right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl"></div>
         <div className="absolute bottom-20 left-20 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
           {/* Stats */}
           <div className="space-y-4 text-left">
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
                 <span className="text-xs text-primary font-bold">✓</span>
               </div>
               <div>
@@ -124,28 +124,6 @@ export default function LoginPage() {
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">Sign In</h1>
             <p className="text-muted-foreground">Welcome back to your career journey</p>
-          </div>
-
-          {/* Social Login */}
-          <div className="space-y-3 mb-6">
-            <Button variant="outline" className="w-full bg-transparent" type="button">
-              <Chrome className="mr-2 h-4 w-4" />
-              Continue with Google
-            </Button>
-            <Button variant="outline" className="w-full bg-transparent" type="button">
-              <Github className="mr-2 h-4 w-4" />
-              Continue with GitHub
-            </Button>
-          </div>
-
-          {/* Divider */}
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with email</span>
-            </div>
           </div>
 
           {/* Form */}
