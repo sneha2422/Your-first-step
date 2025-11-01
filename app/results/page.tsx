@@ -123,7 +123,7 @@ const careerPaths = {
   ],
   CD: [
     {
-      id: "ux-ui-designer",
+      id: "ui-ux-design",
       title: "UX/UI Design",
       description: "Creates intuitive digital experiences",
       keySkills: ["User research", "Wireframing", "Interaction design"],
@@ -376,14 +376,15 @@ const careerPaths = {
   ],
   UI: [
     {
-      id: "ui-ux-design",
-      title: "UI/UX Design",
-      description: "Creates intuitive, aesthetically pleasing, and effective user interfaces and experiences",
+      id: "ux-research",
+      title: "UX Research",
+      description: "Focuses on understanding user behaviors, needs, and motivations through observation, task analysis, and other feedback methodologies.",
       salaryRange: "$85K - $155K",
       growthPotential: "High",
-      growthPath: "UX Designer → Lead Designer → UX Director",
-      dailyWork: "User research, wireframing, high-fidelity prototyping, user testing, interface design (Figma/Sketch)",
-      keySkills: ["User Research", "Wireframing", "Interaction Design", "Prototyping (Figma/Sketch)", "Information Architecture"],
+      growthPath: "UX Researcher → Senior UX Researcher → Research Manager → Director of Research",
+      dailyWork:
+        "Planning and conducting user interviews, creating surveys, analyzing qualitative and quantitative data, creating user personas and journey maps, presenting findings to stakeholders.",
+      keySkills: ["User Interviews", "Survey Design", "Qualitative Data Analysis", "Usability Testing", "Persona Creation"],
       learningPaths: ["Google UX Design Certificate", "UI/UX Design Specialization"],
     },
   ],
@@ -452,36 +453,6 @@ const careerPaths = {
       learningPaths: ["Google Ads Certifications", "Meta Blueprint Certifications"],
     },
   ],
-  SEO: [
-    {
-      id: "search-engine-optimization",
-      title: "Search Engine Optimization",
-      description: "Optimizes website content and technical structure to improve organic search rankings and visibility (SEO)",
-      salaryRange: "$70K - $115K",
-      growthPotential: "High",
-      growthPath: "SEO Specialist → SEO Manager → Head of Organic Search / Digital Marketing Director",
-      dailyWork: "Keyword research, technical SEO audits (site speed, crawlability), link building (off-page SEO), optimizing on-page content, monitoring ranking tools (Ahrefs, SEMrush)",
-      keySkills: ["Keyword Research", "Technical SEO", "Google Analytics/Search Console", "HTML/CSS Basics", "Content Strategy"],
-      learningPaths: ["Google Analytics Certification", "Moz/SEMrush SEO Certifications"],
-    },
-  ],
-  ST: [
-    {
-      id: "strategic-pm",
-      title: "Strategic Project Management",
-      description: "Align projects with organizational strategy and business objectives.",
-      keySkills: ["Portfolio management", "Strategic planning", "Business analysis", "ROI optimization"],
-      dailyWork: "Portfolio prioritization, resource optimization, strategic alignment.",
-      growthPath: "Strategic Project Manager → Portfolio Manager → PMO Director",
-      salaryRange: "$110K - $190K",
-      growthPotential: "Very High",
-      learningPaths: [
-        "Program Management Professional PMI-PgMP Certification Prep Specialization",
-        "Strategic Leadership and Management Specialization",
-        "Business Strategy Specialization",
-      ],
-    },
-  ],
   SA: [
     {
       id: "ux-analytics",
@@ -538,22 +509,9 @@ const careerPaths = {
       learningPaths: ["Product School Certifications", "Product Management courses/bootcamps"],
     },
   ],
-  UR: [
-    {
-      id: "ux-research",
-      title: "UX Research",
-      description: "Investigates user behavior, needs, and motivations through systematic methodologies to inform the design process",
-      salaryRange: "$85K - $135K",
-      growthPotential: "High",
-      growthPath: "UX Researcher → Senior UXR → Lead UXR → Director of User Research",
-      dailyWork: "Planning and conducting user interviews, usability tests, surveys, and field studies, analyzing qualitative and quantitative data, creating personas and journey maps",
-      keySkills: ["Qualitative/Quantitative Research Methods", "Statistical Analysis", "Usability Testing", "Survey Design", "Data Synthesis"],
-      learningPaths: ["Specialized Human-Computer Interaction (HCI) degrees", "Research Design courses"],
-    },
-  ],
   UI_DESIGN: [
     {
-      id: "ui-design-path",
+      id: "ui-design",
       title: "UI Design Path (UI)",
       description: "Create visually appealing and intuitive interfaces.",
       keySkills: ["Visual design principles", "Typography", "Color theory", "Prototyping tools (Figma, Sketch)"],
@@ -603,6 +561,48 @@ const careerPaths = {
       learningPaths: ["Focused courses on React/Vue component libraries", "Web Accessibility certifications"],
     },
   ],
+  SEO: [
+    {
+      id: "seo-specialist",
+      title: "Search Engine Optimization (SEO)",
+      description: "Improves website visibility and ranking on search engines like Google through organic (non-paid) strategies.",
+      salaryRange: "$60K - $100K",
+      growthPotential: "High",
+      growthPath: "SEO Specialist → SEO Manager → Head of SEO/Director of Acquisition",
+      dailyWork:
+        "Conducting keyword research, on-page optimization (content, meta tags), technical SEO audits (site speed, crawlability), link building, and analyzing performance with tools like Google Analytics.",
+      keySkills: ["Keyword Research", "On-Page SEO", "Technical SEO", "Link Building", "Google Analytics", "Content Strategy"],
+      learningPaths: ["Google SEO Fundamentals", "Hubspot SEO Certification Course"],
+    },
+  ],
+  FE: [
+    {
+      id: "frontend-development",
+      title: "Frontend Development",
+      description: "Builds the user-facing part of websites and web applications, focusing on user experience and visual design.",
+      salaryRange: "$90K - $150K",
+      growthPotential: "Very High",
+      growthPath: "Junior Frontend Developer → Frontend Developer → Senior Frontend Developer → Frontend Architect/Lead",
+      dailyWork:
+        "Developing user interfaces with HTML, CSS, and JavaScript, working with frameworks like React or Vue, ensuring responsive design, and optimizing for performance.",
+      keySkills: ["HTML", "CSS", "JavaScript", "React/Vue/Angular", "Responsive Design", "Performance Optimization"],
+      learningPaths: ["Meta Front-End Developer Professional Certificate", "Complete JavaScript courses"],
+    },
+  ],
+  UR: [
+    {
+      id: "ux-research",
+      title: "UX Research",
+      description: "Focuses on understanding user behaviors, needs, and motivations through observation, task analysis, and other feedback methodologies.",
+      salaryRange: "$90K - $160K",
+      growthPotential: "High",
+      growthPath: "UX Researcher → Senior UX Researcher → Research Manager → Director of Research",
+      dailyWork:
+        "Planning and conducting user interviews, creating surveys, analyzing qualitative and quantitative data, creating user personas and journey maps, presenting findings to stakeholders.",
+      keySkills: ["User Interviews", "Survey Design", "Qualitative Data Analysis", "Usability Testing", "Persona Creation"],
+      learningPaths: ["Google UX Design Professional Certificate", "User Research – Methods and Best Practices"],
+    },
+  ],
 }
 
 const domainNames: Record<string, string> = {
@@ -625,7 +625,7 @@ const domainNames: Record<string, string> = {
   DE: "Data Engineering",
   BI: "Business Intelligence",
   BR: "Brand Design",
-  UI: "UI/UX Design",
+  UI: "UI/UX Design", // This was correct, but good to confirm
   IL: "Illustration",
   ID: "Industrial Design",
   CM: "Content Marketing",
@@ -633,14 +633,9 @@ const domainNames: Record<string, string> = {
   PPC: "Paid Advertising",
   SEO: "Search Engine Optimization",
   TP: "Traditional Project Management",
-  AG: "Agile Project Management",
-  TC_PM: "Technical Product Management",
-  BU: "Growth Product Management",
   CX: "Consumer Product Management",
-  ST_PM: "Strategic Product Management",
   UR: "UX Research",
-  IX: "Interaction Design",
-  UI_DESIGN: "UI Design",
+  "ui-design": "UI Design",
   SA: "UX Analytics",
   FE: "Frontend Development",
   BE: "Backend Development",
@@ -866,7 +861,7 @@ function ResultsContent() {
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 mb-4">
                 <Briefcase className="h-6 w-6 text-primary" />
               </div>
-              <h4 className="font-semibold text-foreground mb-2">Find Job Opportunities</h4>
+              <h4 className="font-semibold text-foreground mb-2">Find Job rOpportunities</h4>
               <p className="text-sm text-muted-foreground">Browse positions matching your career path</p>
             </div>
             <div className="text-center">

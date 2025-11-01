@@ -28,11 +28,6 @@ const learningPathData: Record<string, { id: number; title: string; progress: nu
     { id: 2, title: "CompTIA Security+ Prep Course", progress: 40, status: "in-progress" },
     { id: 3, "title": "Ethical Hacking Essentials", progress: 0, status: "not-started" },
   ],
-  "ux-ui-designer": [
-    { id: 1, title: "Google UX Design Certificate", progress: 45, status: "in-progress" },
-    { id: 2, title: "UI/UX Design Specialization", progress: 10, status: "in-progress" },
-    { id: 3, title: "Figma for UI/UX Design", progress: 0, status: "not-started" },
-  ],
   "penetration-tester": [
     { id: 1, title: "Offensive Security Certified Professional (OSCP)", progress: 10, status: "in-progress" },
     { id: 2, title: "GIAC Penetration Tester (GPEN)", progress: 0, status: "not-started" },
@@ -55,7 +50,7 @@ function LearningPathContent() {
     <Card className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-foreground">Your Learning Path</h2>
-        <Link href="/learning">
+        <Link href={`/learning${courseId ? `?course=${courseId}` : ""}`}>
           <Button variant="ghost" size="sm">
             View All
             <ArrowRight className="ml-2 h-4 w-4" />

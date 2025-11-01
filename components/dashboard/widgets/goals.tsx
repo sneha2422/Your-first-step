@@ -37,11 +37,6 @@ const goalsData: Record<string, { id: number; title: string; deadline: string; p
     { id: 2, title: "Set up a home lab for practice", deadline: "1 month", progress: 80 },
     { id: 3, title: "Participate in a Capture The Flag (CTF) competition", deadline: "3 months", progress: 10 },
   ],
-  "ux-ui-designer": [
-    { id: 1, title: "Complete 'Google UX Design' Certificate", deadline: "5 months", progress: 45 },
-    { id: 2, title: "Design and prototype a mobile app", deadline: "3 months", progress: 20 },
-    { id: 3, title: "Build a professional design portfolio", deadline: "4 months", progress: 10 },
-  ],
   "software-engineer": [
     { id: 1, title: "Complete 'Software Design and Architecture' Specialization", deadline: "6 months", progress: 20 },
     { id: 2, title: "Contribute to an open-source project", deadline: "5 months", progress: 5 },
@@ -197,11 +192,6 @@ const goalsData: Record<string, { id: number; title: string; deadline: string; p
     { id: 2, title: "Perform a technical SEO audit on a website", deadline: "1 month", progress: 50 },
     { id: 3, title: "Write an optimized piece of content that ranks for a keyword", deadline: "4 months", progress: 15 },
   ],
-  "agile-pm": [
-    { id: 1, title: "Get Certified ScrumMaster (CSM) certification", deadline: "2 months", progress: 40 },
-    { id: 2, title: "Act as a Scrum Master for a personal or volunteer project", deadline: "3 months", progress: 25 },
-    { id: 3, title: "Master Jira for Agile project management", deadline: "1 month", progress: 70 },
-  ],
   "traditional-pm": [
     { id: 1, title: "Prepare for Project Management Professional (PMP) Certification", deadline: "6 months", progress: 10 },
     { id: 2, title: "Create a detailed project plan with a Gantt chart for a complex task", deadline: "1 month", progress: 60 },
@@ -222,20 +212,10 @@ const goalsData: Record<string, { id: number; title: string; deadline: string; p
     { id: 2, title: "Conduct 5 user interviews for a product idea", deadline: "1 month", progress: 60 },
     { id: 3, title: "Write a full Product Requirements Document (PRD)", deadline: "2 months", progress: 25 },
   ],
-  "strategic-pm": [
-    { id: 1, title: "Complete an advanced product strategy course", deadline: "4 months", progress: 20 },
-    { id: 2, title: "Create a financial model for a new product line", deadline: "2 months", progress: 40 },
-    { id: 3, title: "Perform a competitive analysis of 3 major players in a market", deadline: "1 month", progress: 65 },
-  ],
   "ux-research": [
     { id: 1, title: "Complete a course on Human-Computer Interaction (HCI)", deadline: "5 months", progress: 25 },
     { id: 2, title: "Plan and execute a usability study with 5 participants", deadline: "2 months", progress: 45 },
     { id: 3, title: "Create a set of user personas and journey maps", deadline: "1 month", progress: 70 },
-  ],
-  "interaction-design": [
-    { id: 1, title: "Master an advanced prototyping tool (e.g., Principle, Framer)", deadline: "4 months", progress: 30 },
-    { id: 2, title: "Design and animate micro-interactions for a mobile app", deadline: "2 months", progress: 50 },
-    { id: 3, title: "Create a detailed user flow diagram for a complex feature", deadline: "1 month", progress: 75 },
   ],
   "ui-design": [
     { id: 1, title: "Create a comprehensive design system from scratch", deadline: "4 months", progress: 20 },

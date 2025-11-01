@@ -1065,11 +1065,9 @@ const productManagementQuestions = [
     question: "When looking at products, you focus most on:",
     options: [
       "Technical features and capabilities",
-      "Business value and market opportunity",
       "User experience and customer needs",
-      "Strategic vision and industry trends",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 2,
@@ -1077,18 +1075,16 @@ const productManagementQuestions = [
     question: "Which activity interests you most?",
     options: [
       "Understanding complex technical systems",
-      "Analyzing market data and business metrics",
       "Conducting user research and interviews",
-      "Developing long-term product strategies",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 3,
     section: "Strongest Skill",
     question: "Your strongest skill is:",
     options: ["Technical problem-solving", "Financial analysis and planning", "Understanding user behavior", "Strategic thinking and planning"],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX", "CX", "TC_PM"],
   },
   {
     id: 4,
@@ -1096,11 +1092,9 @@ const productManagementQuestions = [
     question: "In meetings, you often:",
     options: [
       "Discuss technical feasibility and implementation",
-      "Focus on ROI and business metrics",
       "Advocate for user needs and feedback",
-      "Consider long-term impact and direction",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 5,
@@ -1108,11 +1102,9 @@ const productManagementQuestions = [
     question: "What motivates you most?",
     options: [
       "Building innovative technical solutions",
-      "Driving business growth and revenue",
       "Solving real user problems",
-      "Shaping product vision and strategy",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 6,
@@ -1120,11 +1112,9 @@ const productManagementQuestions = [
     question: "You prefer working with:",
     options: [
       "Engineering and development teams",
-      "Sales and business stakeholders",
       "UX researchers and designers",
-      "Executive leadership and stakeholders",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 7,
@@ -1132,11 +1122,9 @@ const productManagementQuestions = [
     question: "Your ideal project involves:",
     options: [
       "Leading technical product development",
-      "Optimizing product monetization",
       "Improving user experience",
-      "Developing new market opportunities",
     ],
-    domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    domains: ["TC_PM", "CX"],
   },
   {
     id: 8,
@@ -1149,6 +1137,7 @@ const productManagementQuestions = [
       "Product roadmaps and strategy",
     ],
     domains: ["TC_PM", "BU", "CX", "ST_PM"],
+   
   },
   {
     id: 9,
@@ -1161,6 +1150,7 @@ const productManagementQuestions = [
       "Market share and competitive position",
     ],
     domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    
   },
   {
     id: 10,
@@ -1173,6 +1163,7 @@ const productManagementQuestions = [
       "Long-term strategic alignment",
     ],
     domains: ["TC_PM", "BU", "CX", "ST_PM"],
+    
   },
 ]
 
@@ -1600,15 +1591,12 @@ const quizData = {
     questions: productManagementQuestions,
     domains: {
       TC_PM: "Technical Product Management",
-      BU: "Growth Product Management",
       CX: "Consumer Product Management",
-      ST_PM: "Strategic Product Management",
     },
   },
   "project-management": {
     questions: projectManagementNewQuestions,
     domains: {
-      TP: "Traditional Project Management",
       AG: "Agile Project Management",
       TC: "Team Leadership",
       ST: "Strategic Management",
@@ -1618,8 +1606,6 @@ const quizData = {
     questions: uxQuestions,
     domains: {
       UR: "UX Research",
-      UI_DESIGN: "UI Design",
-      IX: "Interaction Design",
       SA: "UX Analytics",
     },
   },
@@ -1682,8 +1668,6 @@ const domainRecommendations = {
   "product-management": {
     TC_PM: "You have a strong technical background and enjoy working with engineering teams. A career as a Technical Product Manager would be a great fit.",
     BU: "You are business-savvy and enjoy analyzing market data. A career as a Growth Product Manager, focusing on user acquisition and revenue, would be a perfect match.",
-    CX: "You are passionate about understanding user needs and creating great experiences. A career as a Consumer Product Manager would be exciting.",
-    ST_PM: "You enjoy thinking long-term and shaping product vision. A career as a Strategic Product Manager would suit you well.",
   },
   "project-management": {
     TP: "You are organized and enjoy creating detailed project plans. A career in Traditional Project Management would be a great fit.",
@@ -1694,7 +1678,6 @@ const domainRecommendations = {
   ux: {
     UR: "You are curious about people's motivations and enjoy conducting user research. A career as a UX Researcher would be a great fit.",
     UI_DESIGN: "You have a strong sense of visual design and enjoy creating beautiful interfaces. A career as a UI Designer would be a perfect match.",
-    IX: "You enjoy solving complex interaction problems and designing seamless user flows. A career as an Interaction Designer would be exciting.",
     SA: "You love working with data and metrics to improve product performance. A career as a UX Analyst would suit you well.",
   },
   "web-development": {
