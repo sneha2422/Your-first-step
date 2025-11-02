@@ -1605,6 +1605,8 @@ const quizData = {
     questions: uxQuestions,
     domains: {
       UR: "UX Research",
+      UI_DESIGN: "UI Design",
+      IX: "Interaction Design",
       SA: "UX Analytics",
     },
   },
@@ -1677,6 +1679,7 @@ const domainRecommendations = {
   ux: {
     UR: "You are curious about people's motivations and enjoy conducting user research. A career as a UX Researcher would be a great fit.",
     UI_DESIGN: "You have a strong sense of visual design and enjoy creating beautiful interfaces. A career as a UI Designer would be a perfect match.",
+    IX: "You enjoy thinking about how systems work and designing seamless user flows. A career as an Interaction Designer would be an excellent choice.",
     SA: "You love working with data and metrics to improve product performance. A career as a UX Analyst would suit you well.",
   },
   "web-development": {
