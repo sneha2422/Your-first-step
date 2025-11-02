@@ -1,226 +1,204 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Filter, Briefcase } from "lucide-react"
+import { useState, useEffect, Suspense } from "react"
+import Image from "next/image"
+import { useSearchParams } from "next/navigation"
+import { Search, Briefcase, ArrowRight, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
-import JobFilters from "@/components/jobs/filters"
-import JobCard from "@/components/jobs/job-card"
 
-const mockJobs = [
-  {
-    id: 1,
-    title: "Senior Product Manager",
-    company: "Google",
-    location: "Mountain View, CA",
-    salary: "$150K - $200K",
-    type: "Full-time",
-    remote: "Hybrid",
-    match: 94,
-    description: "Lead product strategy and development for our core platform.",
-    skills: ["Product Strategy", "Leadership", "Data Analysis"],
-    posted: "2 days ago",
-  },
-  {
-    id: 2,
-    title: "Product Lead",
-    company: "Microsoft",
-    location: "Seattle, WA",
-    salary: "$140K - $190K",
-    type: "Full-time",
-    remote: "Hybrid",
-    match: 91,
-    description: "Drive product vision and execution for enterprise solutions.",
-    skills: ["Product Management", "Communication", "Strategic Thinking"],
-    posted: "1 day ago",
-  },
-  {
-    id: 3,
-    title: "Head of Product",
-    company: "Stripe",
-    location: "San Francisco, CA",
-    salary: "$160K - $220K",
-    type: "Full-time",
-    remote: "Remote",
-    match: 88,
-    description: "Build and lead the product organization for payments platform.",
-    skills: ["Leadership", "Product Strategy", "Team Management"],
-    posted: "3 days ago",
-  },
-  {
-    id: 4,
-    title: "Product Manager - AI",
-    company: "OpenAI",
-    location: "San Francisco, CA",
-    salary: "$130K - $180K",
-    type: "Full-time",
-    remote: "On-site",
-    match: 85,
-    description: "Shape the future of AI products and user experiences.",
-    skills: ["AI/ML", "Product Strategy", "Technical Skills"],
-    posted: "1 week ago",
-  },
-  {
-    id: 5,
-    title: "Associate Product Manager",
-    company: "Meta",
-    location: "Menlo Park, CA",
-    salary: "$120K - $160K",
-    type: "Full-time",
-    remote: "Hybrid",
-    match: 82,
-    description: "Launch and iterate on products impacting billions of users.",
-    skills: ["Product Management", "Analytics", "Communication"],
-    posted: "4 days ago",
-  },
-  {
-    id: 6,
-    title: "Product Manager - Growth",
-    company: "Airbnb",
-    location: "San Francisco, CA",
-    salary: "$140K - $190K",
-    type: "Full-time",
-    remote: "Hybrid",
-    match: 79,
-    description: "Drive growth initiatives and user acquisition strategies.",
-    skills: ["Growth", "Analytics", "Experimentation"],
-    posted: "5 days ago",
-  },
-]
+type JobPlatform = "LinkedIn" | "Naukri" | "Wellfound"
 
-export default function JobsPage() {
+const toKebabCase = (str: string) =>
+  str
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .toLowerCase()
+
+const jobTitlesByCareer: Record<string, string[]> = {
+  default: ["Product Manager", "Senior Product Manager", "Product Lead"],
+  "software-developer": ["Software Developer", "Backend Developer", "Full Stack Developer"],
+  "data-analytics": ["Data Analyst", "Business Intelligence Analyst", "Senior Data Analyst"],
+  cybersecurity: ["Cybersecurity Analyst", "Security Engineer", "Incident Responder"],
+  "software-engineer": ["Software Engineer", "Senior Software Engineer", "Staff Engineer"],
+  "clinical-lead": ["Clinical Team Lead", "Clinical Manager", "Nurse Manager"],
+  "healthcare-educator": ["Healthcare Educator", "Clinical Educator", "Nurse Educator"],
+  "ui-ux-design": ["UX/UI Designer", "Product Designer", "UX Designer"],
+  "visual-designer": ["Visual Designer", "Graphic Designer", "Communication Designer"],
+  "systems-engineer": ["Systems Engineer", "Infrastructure Engineer", "Cloud Engineer"],
+  "mechanical-engineer": ["Mechanical Engineer", "Civil Engineer", "Structural Engineer"],
+  "digital-marketing": ["Digital Marketing Manager", "Marketing Manager", "Social Media Manager"],
+  "brand-manager": ["Brand Manager", "Product Marketing Manager", "Brand Strategist"],
+  "nlp-engineer": ["NLP Engineer", "Machine Learning Engineer, NLP", "Conversational AI Developer"],
+  "cv-engineer": ["Computer Vision Engineer", "Machine Learning Engineer, Computer Vision", "Perception Engineer"],
+  "rl-engineer": ["Reinforcement Learning Engineer", "RL Research Scientist", "Robotics Engineer"],
+  "ai-ethics": ["AI Ethics Specialist", "Responsible AI Lead", "AI Policy Advisor"],
+  "penetration-tester": ["Penetration Tester", "Offensive Security Engineer", "Red Team Operator"],
+  "defensive-security": ["Security Analyst (SOC)", "Defensive Security Engineer", "Threat Hunter"],
+  "incident-response": ["Incident Responder", "Digital Forensics Analyst", "Malware Analyst"],
+  "governance-compliance": ["GRC Analyst", "IT Auditor", "Compliance Manager"],
+  "data-analysis": ["Data Analyst", "Business Analyst", "SQL Analyst"],
+  "machine-learning": ["Machine Learning Engineer", "Data Scientist, Machine Learning", "AI Engineer"],
+  "data-engineering": ["Data Engineer", "ETL Developer", "Big Data Engineer"],
+  "business-intelligence": ["BI Developer", "Business Intelligence Analyst", "Tableau Developer"],
+  "brand-design": ["Brand Designer", "Visual Designer", "Brand Strategist"],
+  illustration: ["Illustrator", "Concept Artist", "Graphic Artist"],
+  "industrial-design": ["Industrial Designer", "Product Designer", "3D Modeler"],
+  "content-marketing": ["Content Marketing Manager", "Content Strategist", "Copywriter"],
+  "social-media-marketing": ["Social Media Manager", "Community Manager", "Social Media Strategist"],
+  "paid-advertising": ["PPC Specialist", "Paid Media Manager", "Performance Marketing Manager"],
+  "seo-specialist": ["SEO Specialist", "SEO Manager", "SEO Strategist"],
+  "traditional-pm": ["Project Manager", "Program Manager", "Project Coordinator"],
+  "consumer-pm": ["Product Manager, Consumer", "Associate Product Manager", "Group Product Manager"],
+  "ux-research": ["UX Researcher", "User Researcher", "Research Manager"],
+  "ui-design": ["UI Designer", "Visual Designer", "Interface Designer"],
+  "ux-analytics": ["UX Analyst", "Product Analyst", "Data Analyst, UX"],
+  "frontend-development": ["Frontend Developer", "React Developer", "Frontend Engineer"],
+  "backend-development": ["Backend Developer", "Backend Engineer", "Node.js Developer"],
+  "full-stack-development": ["Full Stack Developer", "Full Stack Engineer", "MERN Stack Developer"],
+  "ui-ux-development": ["UI/UX Developer", "Design Technologist", "Creative Technologist"],
+}
+
+const platformConfig: Record<
+  JobPlatform,
+  { logo: string; generateUrl: (query: string) => string; description: string }
+> = {
+  LinkedIn: {
+    logo: "/linkdin.jpg",
+    generateUrl: (query) =>
+      `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(query)}&f_TPR=r86400&sortBy=DD`,
+    description: "Best for corporate roles and professional networking.",
+  },
+  Naukri: {
+    logo: "/naukri.jpg",
+    generateUrl: (query) => `https://www.naukri.com/jobs-in-india?k=${encodeURIComponent(query)}&freshness=1`,
+    description: "A leading job portal for opportunities in India.",
+  },
+  Wellfound: {
+    logo: "/wellfound.jpg",
+    generateUrl: (query) => `https://wellfound.com/jobs?q=${encodeURIComponent(query)}`,
+    description: "The leading platform for jobs at startups and tech companies.",
+  },
+}
+
+function JobsPageContent() {
+  const searchParams = useSearchParams()
+  const courseId = searchParams.get("course")
   const [searchQuery, setSearchQuery] = useState("")
-  const [filters, setFilters] = useState({
-    salary: [0, 250],
-    remote: [] as string[],
-    type: [] as string[],
-    location: "",
-  })
-  const [sortBy, setSortBy] = useState("match")
-  const [savedJobs, setSavedJobs] = useState<number[]>([])
+  const [currentJobTitles, setCurrentJobTitles] = useState<string[]>([])
 
-  const filteredJobs = mockJobs
-    .filter((job) => {
-      const matchesSearch =
-        job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchQuery.toLowerCase())
+  useEffect(() => {
+    const titles = (courseId && jobTitlesByCareer[courseId]) || jobTitlesByCareer.default
+    setCurrentJobTitles(titles)
+  }, [courseId])
 
-      const salaryMin = Number.parseInt(job.salary.split("-")[0].replace(/\D/g, ""))
-      const matchesSalary = salaryMin >= filters.salary[0] && salaryMin <= filters.salary[1]
-
-      const matchesRemote = filters.remote.length === 0 || filters.remote.includes(job.remote)
-      const matchesType = filters.type.length === 0 || filters.type.includes(job.type)
-      const matchesLocation = !filters.location || job.location.toLowerCase().includes(filters.location.toLowerCase())
-
-      return matchesSearch && matchesSalary && matchesRemote && matchesType && matchesLocation
-    })
-    .sort((a, b) => {
-      if (sortBy === "match") return b.match - a.match
-      if (sortBy === "salary") return Number.parseInt(b.salary.split("-")[1]) - Number.parseInt(a.salary.split("-")[1])
-      return 0
-    })
-
-  const toggleSaveJob = (jobId: number) => {
-    setSavedJobs((prev) => (prev.includes(jobId) ? prev.filter((id) => id !== jobId) : [...prev, jobId]))
-  }
+  const filteredTitles = currentJobTitles.filter((title) => title.toLowerCase().includes(searchQuery.toLowerCase()))
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-foreground mb-6">Job Opportunities</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Live Job Opportunities</h1>
+          <p className="text-muted-foreground">
+            Explore real-time job openings from top platforms, updated continuously.
+          </p>
 
           {/* Search Bar */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-6">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search jobs, companies..."
+                placeholder="Filter job titles (e.g., Senior, Backend)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
               />
             </div>
-            <Button variant="outline" className="bg-transparent">
-              <Filter className="mr-2 h-4 w-4" />
-              Filters
-            </Button>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-4">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <JobFilters filters={filters} setFilters={setFilters} />
-          </div>
-
-          {/* Jobs List */}
-          <div className="lg:col-span-3">
-            {/* Sort Options */}
-            <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-muted-foreground">
-                Showing {filteredJobs.length} of {mockJobs.length} jobs
-              </p>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-3 py-1 rounded-lg border border-border bg-background text-foreground text-sm"
-                >
-                  <option value="match">Best Match</option>
-                  <option value="salary">Highest Salary</option>
-                  <option value="recent">Most Recent</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Jobs Grid */}
-            <div className="space-y-4">
-              {filteredJobs.length > 0 ? (
-                filteredJobs.map((job) => (
-                  <JobCard
-                    key={job.id}
-                    job={job}
-                    isSaved={savedJobs.includes(job.id)}
-                    onSave={() => toggleSaveJob(job.id)}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {(Object.keys(platformConfig) as JobPlatform[]).map((platform) => (
+            <Card key={platform} className="p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="relative h-8 w-8">
+                  <Image
+                    src={platformConfig[platform].logo}
+                    alt={`${platform} logo`}
+                    fill
+                    className="object-contain"
                   />
-                ))
-              ) : (
-                <Card className="p-12 text-center">
-                  <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">No jobs found</h3>
-                  <p className="text-muted-foreground">Try adjusting your filters or search query</p>
-                </Card>
-              )}
-            </div>
-
-            {/* Pagination */}
-            {filteredJobs.length > 0 && (
-              <div className="flex items-center justify-center gap-2 mt-8">
-                <Button variant="outline" className="bg-transparent">
-                  Previous
-                </Button>
-                <Button variant="outline" className="bg-transparent">
-                  1
-                </Button>
-                <Button>2</Button>
-                <Button variant="outline" className="bg-transparent">
-                  3
-                </Button>
-                <Button variant="outline" className="bg-transparent">
-                  Next
-                </Button>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground">{platform}</h3>
+                  <p className="text-xs text-muted-foreground">{platformConfig[platform].description}</p>
+                </div>
               </div>
-            )}
-          </div>
+
+              <div className="flex-1 space-y-2 mb-6">
+                <p className="text-sm font-medium text-foreground">Example Job Titles:</p>
+                {filteredTitles.slice(0, 3).map((title) => (
+                  <div key={title} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Briefcase className="h-3.5 w-3.5 shrink-0" />
+                    <span>{title}</span>
+                  </div>
+                ))}
+                {filteredTitles.length === 0 && (
+                  <p className="text-sm text-muted-foreground">No matching titles for your filter.</p>
+                )}
+              </div>
+
+              <Button asChild className="mt-auto w-full">
+                <a
+                  href={platformConfig[platform].generateUrl(searchQuery
+                      ? `${(courseId && jobTitlesByCareer[courseId]?.[0]) || jobTitlesByCareer.default[0]} ${searchQuery}`
+                      : (courseId && jobTitlesByCareer[courseId]?.[0]) || jobTitlesByCareer.default[0]
+                    )
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Zap className="mr-2 h-4 w-4" />
+                  View Live Jobs on {platform}
+                </a>
+              </Button>
+            </Card>
+          ))}
         </div>
+
+        {filteredTitles.length === 0 && searchQuery && (
+          <div className="mt-8">
+            <Card className="p-12 text-center">
+              <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">No job titles found</h3>
+              <p className="text-muted-foreground">Try adjusting your search query.</p>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
+  )
+}
+
+export default function JobsPage() {
+  return (
+    // Wrap the component in Suspense because it uses useSearchParams
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen">
+          <div className="flex items-center gap-2">
+            <Briefcase className="h-6 w-6 animate-pulse" />
+            <p className="text-lg font-medium text-muted-foreground">Loading Live Job Opportunities...</p>
+          </div>
+        </div>
+      }
+    >
+      <JobsPageContent />
+    </Suspense>
   )
 }

@@ -245,7 +245,7 @@ function RecentJobsContent() {
     <Card className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-foreground">Recently Matched Jobs</h2>
-        <Link href="/jobs">
+        <Link href={`/jobs${courseId ? `?course=${courseId}` : ""}`}>
           <Button variant="ghost" size="sm">
             View All
             <ArrowRight className="ml-2 h-4 w-4" />
