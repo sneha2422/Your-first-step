@@ -230,6 +230,12 @@ function DashboardContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userName, setUserName] = useState("Sneha V")
   const [recommendations, setRecommendations] = useState(recommendationsData.default)
+  const [stats, setStats] = useState({
+    profileStrength: 0,
+    matchingJobs: 0,
+    learningProgress: 0,
+    marketInsights: 0,
+  })
 
   const searchParams = useSearchParams()
   const courseId = searchParams.get("course")
@@ -242,8 +248,44 @@ function DashboardContent() {
   }, [])
 
   useEffect(() => {
-    const newRecommendations = (courseId && recommendationsData[courseId]) || recommendationsData.default
+    const newRecommendations = (courseId && recommendationsData[courseId]) || recommendationsData.default;
     setRecommendations(newRecommendations)
+
+    // Simulate fetching personalized stats
+    // In a real app, this would come from an API call based on the user's profile
+    const fetchStats = () => {
+      // Simulate a user profile object. In a real app, this would be fetched from your database.
+      // For a new user, these fields would be empty, resulting in a low profile strength.
+      // As they fill out their profile (e.g., in the Settings page), this data would update.
+      const userProfile = {
+        name: "Sneha V", // This might come from initial sign-up
+        email: "sneha@example.com", // This might come from initial sign-up
+        phone: "",
+        location: "",
+        bio: "",
+        linkedinUrl: "",
+        courseraProgress: 0, // Percentage, starts at 0
+        assessmentTaken: false, // Starts as false
+      };
+
+      // Calculate profile strength based on completion
+      let score = 0;
+      if (userProfile.name) score += 15;
+      if (userProfile.email) score += 15;
+      if (userProfile.location) score += 10;
+      if (userProfile.bio) score += 15;
+      if (userProfile.linkedinUrl) score += 20;
+      if (userProfile.assessmentTaken) score += 20;
+      const profileStrength = Math.min(score, 100); // Cap at 100
+
+      // Example: Job count from recommendations or a job board API
+      const matchingJobs = courseId ? 15 + Math.floor(Math.random() * 10) : 24;
+      // Example: Learning progress from a learning platform integration
+      const learningProgress = courseId ? 25 + Math.floor(Math.random() * 30) : 45;
+      const marketInsights = courseId ? 8 + Math.floor(Math.random() * 8) : 12;
+      setStats({ profileStrength, matchingJobs, learningProgress, marketInsights });
+    };
+    fetchStats();
   }, [courseId])
 
   return (
@@ -279,7 +321,7 @@ function DashboardContent() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Profile Strength</p>
-                      <p className="text-2xl font-bold text-foreground">85%</p>
+                      <p className="text-2xl font-bold text-foreground">{stats.profileStrength}%</p>
                     </div>
                     <TrendingUp className="h-5 w-5 text-primary" />
                   </div>
@@ -289,7 +331,7 @@ function DashboardContent() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Matching Jobs</p>
-                      <p className="text-2xl font-bold text-foreground">24</p>
+                      <p className="text-2xl font-bold text-foreground">{stats.matchingJobs}</p>
                     </div>
                     <Briefcase className="h-5 w-5 text-primary" />
                   </div>
@@ -299,7 +341,7 @@ function DashboardContent() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Learning Progress</p>
-                      <p className="text-2xl font-bold text-foreground">45%</p>
+                      <p className="text-2xl font-bold text-foreground">{stats.learningProgress}%</p>
                     </div>
                     <BookOpen className="h-5 w-5 text-primary" />
                   </div>
@@ -309,7 +351,7 @@ function DashboardContent() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Market Insights</p>
-                      <p className="text-2xl font-bold text-foreground">12</p>
+                      <p className="text-2xl font-bold text-foreground">{stats.marketInsights}</p>
                     </div>
                     <BarChart3 className="h-5 w-5 text-primary" />
                   </div>
