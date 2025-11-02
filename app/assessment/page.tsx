@@ -1573,6 +1573,7 @@ const quizData = {
     questions: graphicDesignQuestions,
     domains: {
       BR: "Brand Design",
+      UI: "UI/UX Design",
       IL: "Illustration",
       ID: "Industrial Design",
     },
