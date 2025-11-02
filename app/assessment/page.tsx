@@ -1671,7 +1671,9 @@ const domainRecommendations = {
   },
   "product-management": {
     TC_PM: "You have a strong technical background and enjoy working with engineering teams. A career as a Technical Product Manager would be a great fit.",
+    CX: "You are passionate about understanding user needs and creating exceptional experiences. A career as a Consumer Product Manager, focusing on user-facing products, would be a perfect match.",
     BU: "You are business-savvy and enjoy analyzing market data. A career as a Growth Product Manager, focusing on user acquisition and revenue, would be a perfect match.",
+    ST_PM: "You excel at long-term thinking and aligning product vision with business goals. A career as a Strategic Product Manager would be a great fit for your skills.",
   },
   "project-management": {
     TP: "You are organized and enjoy creating detailed project plans. A career in Traditional Project Management would be a great fit.",
