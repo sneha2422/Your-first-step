@@ -161,17 +161,7 @@ const learningPathData: Record<string, { id: number; title: string; progress: nu
     { id: 2, title: "Usability Testing and Analysis", progress: 10, status: "in-progress" },
     { id: 3, title: "Translating Research into Design Action", progress: 0, status: "not-started" },
   ],
-  "ui-design": [
-    { id: 1, title: "Visual Hierarchy and Layout Principles", progress: 85, status: "in-progress" },
-    { id: 2, title: "Motion Design for UI", progress: 100, status: "in-progress" },
-    { id: 3, title: "Figma Auto Layout and Variants", progress: 30, status: "in-progress" },
-  ],
-  "ux-analytics": [
-    { id: 1, title: "Product Analytics (Mixpanel/Amplitude)", progress: 65, status: "in-progress" },
-    { id: 2, title: "Funnel Analysis and Drop-off Rates", progress: 10, status: "in-progress" },
-    { id: 3, title: "A/B Testing Data Interpretation", progress: 0, status: "not-started" },
-  ],
-
+  
   // --- MARKETING PATHS ---
   marketing: [
     { id: 1, title: "Digital Marketing Strategy Certification", progress: 50, status: "in-progress" },

@@ -157,11 +157,6 @@ const goalsData: Record<string, { id: number; title: string; deadline: string; p
     { id: 2, title: "Design a complete brand guide for a fictional company", deadline: "4 months", progress: 25 },
     { id: 3, title: "Master Adobe Illustrator and Photoshop", deadline: "6 months", progress: 40 },
   ],
-  "ui-ux-design": [
-    { id: 1, title: "Complete 'Google UX Design' Certificate", deadline: "5 months", progress: 45 },
-    { id: 2, title: "Design and prototype a mobile app in Figma", deadline: "3 months", progress: 20 },
-    { id: 3, title: "Build a professional design portfolio with 3 case studies", deadline: "4 months", progress: 10 },
-  ],
   "illustration": [
     { id: 1, title: "Complete a specialized illustration course", deadline: "4 months", progress: 30 },
     { id: 2, title: "Create a new illustration piece every week for 2 months", deadline: "2 months", progress: 50 },

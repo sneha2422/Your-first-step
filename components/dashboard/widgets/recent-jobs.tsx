@@ -179,11 +179,6 @@ const jobSearches: Record<string, { id: number; title: string }[]> = {
     { id: 3402, title: "User Researcher" },
     { id: 3403, title: "Research Manager" },
   ],
-  "ui-design": [
-    { id: 3501, title: "UI Designer" },
-    { id: 3502, title: "Visual Designer" },
-    { id: 3503, title: "Interface Designer" },
-  ],
   "ux-analytics": [
     { id: 3601, title: "UX Analyst" },
     { id: 3602, title: "Product Analyst" },

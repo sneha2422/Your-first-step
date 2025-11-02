@@ -123,17 +123,6 @@ const careerPaths = {
   ],
   CD: [
     {
-      id: "ui-ux-design",
-      title: "UX/UI Design",
-      description: "Creates intuitive digital experiences",
-      keySkills: ["User research", "Wireframing", "Interaction design"],
-      dailyWork: "Interface design, user testing, prototyping",
-      growthPath: "UX Designer → Lead Designer → UX Director",
-      salaryRange: "$85K - $155K",
-      growthPotential: "High",
-      learningPaths: ["Google UX Design Certificate", "UI/UX Design Specialization"],
-    },
-    {
       id: "visual-designer",
       title: "Visual Design",
       description: "Develops brand and product visuals",
@@ -509,19 +498,6 @@ const careerPaths = {
       learningPaths: ["Product School Certifications", "Product Management courses/bootcamps"],
     },
   ],
-  UI_DESIGN: [
-    {
-      id: "ui-design",
-      title: "UI Design Path (UI)",
-      description: "Create visually appealing and intuitive interfaces.",
-      keySkills: ["Visual design principles", "Typography", "Color theory", "Prototyping tools (Figma, Sketch)"],
-      dailyWork: "Creating UI mockups, Maintaining design systems, Visual design iteration, Collaborating with developers.",
-      growthPath: "Junior UI Designer → Senior UI Designer → Lead Designer → Design Director",
-      salaryRange: "$80K - $150K",
-      growthPotential: "High",
-      learningPaths: ["UI/UX Design Specialization", "Design Fundamentals", "Create High-Fidelity Designs and Prototypes in Figma"],
-    },
-  ],
   FS: [
     {
       id: "full-stack-development",
@@ -625,7 +601,6 @@ const domainNames: Record<string, string> = {
   DE: "Data Engineering",
   BI: "Business Intelligence",
   BR: "Brand Design",
-  UI: "UI/UX Design", // This was correct, but good to confirm
   IL: "Illustration",
   ID: "Industrial Design",
   CM: "Content Marketing",
@@ -635,7 +610,6 @@ const domainNames: Record<string, string> = {
   TP: "Traditional Project Management",
   CX: "Consumer Product Management",
   UR: "UX Research",
-  "ui-design": "UI Design",
   SA: "UX Analytics",
   FE: "Frontend Development",
   BE: "Backend Development",
