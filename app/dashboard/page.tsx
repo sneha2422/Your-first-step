@@ -310,9 +310,16 @@ function DashboardContent() {
           <main className="flex-1 overflow-auto">
             <div className="p-4 sm:p-6 lg:p-8">
               {/* Welcome Section */}
-              <div className="mb-8">
-                <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, {userName}</h1>
-                <p className="text-muted-foreground">Here's your personalized career dashboard</p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
+                <div>
+                  <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, {userName}</h1>
+                  <p className="text-muted-foreground">Here's your personalized career dashboard</p>
+                </div>
+                <Link href="/assessment">
+                  <Button variant="outline" className="bg-transparent mt-4 sm:mt-0">
+                    Back to Quizes
+                  </Button>
+                </Link>
               </div>
 
               {/* Quick Stats */}

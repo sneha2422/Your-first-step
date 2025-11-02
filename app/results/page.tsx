@@ -472,6 +472,32 @@ const careerPaths = {
       learningPaths: ["Software Product Management Specialization", "API Product Management", "Cloud Architecture Fundamentals"],
     },
   ],
+  BU: [
+    {
+      id: "growth-pm",
+      title: "Growth Product Management",
+      description: "Focuses on user acquisition, activation, retention, and revenue.",
+      keySkills: ["A/B Testing", "Data Analysis", "Funnel Optimization", "Marketing Acumen"],
+      dailyWork: "Running experiments, analyzing user data, collaborating with marketing, identifying growth levers.",
+      growthPath: "Growth PM → Head of Growth → VP of Growth",
+      salaryRange: "$125K - $210K",
+      growthPotential: "Very High",
+      learningPaths: ["Growth Series (Reforge)", "Advanced Growth Strategy"],
+    },
+  ],
+  ST_PM: [
+    {
+      id: "strategic-pm",
+      title: "Strategic Product Manager",
+      description: "Focuses on long-term product vision, market positioning, and portfolio management.",
+      keySkills: ["Market Research", "Competitive Analysis", "Roadmap Planning", "Business Acumen"],
+      dailyWork: "Market analysis, defining long-term vision, aligning product portfolio with company goals.",
+      growthPath: "Strategic PM → Director of Product Strategy → VP of Product",
+      salaryRange: "$140K - $230K",
+      growthPotential: "Very High",
+      learningPaths: ["Business Strategy Specialization", "Advanced Product Management (Reforge)"],
+    },
+  ],
   TP: [
     {
       id: "traditional-pm",
@@ -579,6 +605,35 @@ const careerPaths = {
       learningPaths: ["Google UX Design Professional Certificate", "User Research – Methods and Best Practices"],
     },
   ],
+  AG: [
+    {
+      id: "agile-pm",
+      title: "Agile Project Manager",
+      description: "Leads projects using iterative and flexible Agile methodologies.",
+      keySkills: ["Scrum", "Kanban", "Adaptability", "Servant Leadership"],
+      dailyWork: "Facilitating daily stand-ups, managing backlogs, removing impediments.",
+      growthPath: "Scrum Master → Agile Coach → Head of Agility",
+      salaryRange: "$100K - $165K",
+      growthPotential: "High",
+      learningPaths: ["Certified ScrumMaster (CSM)", "Professional Scrum Master (PSM)"],
+    },
+  ],
+  ST: [
+    {
+      id: "strategic-pm",
+      title: "Strategic Program Manager",
+      description: "Oversees a portfolio of projects to ensure alignment with long-term business goals.",
+      keySkills: ["Portfolio Management", "Strategic Planning", "Business Acumen", "Stakeholder Alignment"],
+      dailyWork: "Roadmap planning, resource allocation across projects, reporting to leadership.",
+      growthPath: "Program Manager → Portfolio Manager → Director of Strategy",
+      salaryRange: "$120K - $190K",
+      growthPotential: "Very High",
+      learningPaths: [
+        "Program Management Professional (PgMP) Certification",
+        "Strategic Leadership and Management Specialization",
+      ],
+    },
+  ],
 }
 
 const domainNames: Record<string, string> = {
@@ -615,6 +670,10 @@ const domainNames: Record<string, string> = {
   BE: "Backend Development",
   FS: "Full Stack Development",
   DE_WEB: "UI/UX Development",
+  AG: "Agile Project Management",
+  ST: "Strategic Management",
+  BU: "Business-focused PM",
+  ST_PM: "Strategy-focused PM",
 }
 
 function ResultsContent() {
@@ -661,16 +720,11 @@ function ResultsContent() {
               <h1 className="text-3xl font-bold text-foreground">Career Recommendations</h1>
               <p className="text-muted-foreground mt-1">Explore career paths across different domains</p>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="bg-transparent">
-                <Download className="mr-2 h-4 w-4" />
-                Download
+            <Link href="/dashboard">
+              <Button variant="outline" className="bg-transparent">
+                Back to Dashboard
               </Button>
-              <Button variant="outline" size="sm" className="bg-transparent">
-                <Share2 className="mr-2 h-4 w-4" />
-                Share
-              </Button>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

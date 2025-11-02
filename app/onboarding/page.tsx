@@ -70,6 +70,21 @@ export default function OnboardingPage() {
     }
   }
 
+  const isStepValid = () => {
+    switch (currentStep) {
+      case 1:
+        return !!(formData.firstName && formData.lastName && formData.dateOfBirth && formData.location)
+      case 2:
+        return !!(formData.currentRole && formData.yearsExperience && formData.industry)
+      case 3:
+        return formData.skills.length > 0 && formData.interests.length > 0
+      case 4:
+        return !!(formData.salaryExpectation && formData.workStyle && formData.careerGoal)
+      default:
+        return false
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background">
       {/* Header */}
@@ -151,7 +166,7 @@ export default function OnboardingPage() {
                   <ChevronLeft className="mr-2 h-4 w-4" />
                   Previous
                 </Button>
-                <Button onClick={handleNext} className="ml-auto">
+                <Button onClick={handleNext} className="ml-auto" disabled={!isStepValid()}>
                   {currentStep === steps.length ? "Complete" : "Next"}
                   {currentStep < steps.length && <ChevronRight className="ml-2 h-4 w-4" />}
                 </Button>

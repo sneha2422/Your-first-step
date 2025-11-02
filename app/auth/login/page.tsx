@@ -6,6 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Eye, EyeOff, Mail, Lock, ArrowRight, Chrome, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 
 export default function LoginPage() {
@@ -16,6 +17,13 @@ export default function LoginPage() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [view, setView] = useState<"login" | "forgot">("login")
+  const [newPassword, setNewPassword] = useState("")
+  const [confirmNewPassword, setConfirmNewPassword] = useState("")
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [forgotPasswordError, setForgotPasswordError] = useState("")
+  const [isUpdating, setIsUpdating] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -51,6 +59,29 @@ export default function LoginPage() {
     setIsLoading(false)
     // Redirect to dashboard
     window.location.href = "/dashboard"
+  }
+
+  const handleForgotPasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (newPassword !== confirmNewPassword) {
+      setForgotPasswordError("Passwords do not match.")
+      return
+    }
+    if (newPassword.length < 8) {
+      setForgotPasswordError("Password must be at least 8 characters.")
+      return
+    }
+    setForgotPasswordError("")
+    setIsUpdating(true)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    setIsUpdating(false)
+    setShowSuccessMessage(true)
+    setTimeout(() => {
+      setShowSuccessMessage(false)
+      setView("login")
+      setNewPassword("")
+      setConfirmNewPassword("")
+    }, 3000)
   }
 
   return (
@@ -111,97 +142,134 @@ export default function LoginPage() {
         <div className="mx-auto w-full max-w-sm">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <img src="\Lucid_Origin_a_dark_themed_logo_image_featuring_a_footprint_as_1.jpg" 
-            alt="Logo"
-            className="w-6 h-6 object-contain"
-            style={{ background: "transparent" }}
-            />
-            </div>
-            <span className="text-xl font-bold text-foreground">CareerPath</span>
+            <Image src="/logo.jpg" alt="Your First Step Logo" width={32} height={32} className="rounded-lg" />
+            <span className="text-xl font-bold text-foreground">Your First Step</span>
           </div>
 
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">Sign In</h1>
-            <p className="text-muted-foreground">Welcome back to your career journey</p>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="pl-10"
-                />
+          {view === "login" ? (
+            <>
+              <div className="mb-8">
+                <h1 className="text-3xl font-bold text-foreground mb-2">Sign In</h1>
+                <p className="text-muted-foreground">Welcome back to your career journey</p>
               </div>
-              {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
-            </div>
 
-            {/* Password */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label htmlFor="password" className="block text-sm font-medium text-foreground">
-                  Password
-                </label>
-                <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
-                  Forgot?
+              {showSuccessMessage && (
+                <div className="mb-4 p-3 rounded-md bg-green-500/10 border border-green-500/50 text-green-500 text-sm font-medium">
+                  Password updated successfully! You can now log in.
+                </div>
+              )}
+
+              {/* Login Form */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input id="email" name="email" type="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} className="pl-10" />
+                  </div>
+                  {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input id="password" name="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={formData.password} onChange={handleChange} className="pl-10 pr-10" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-muted-foreground hover:text-foreground">
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {errors.password && <p className="text-sm text-destructive mt-1">{errors.password}</p>}
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <input type="checkbox" id="remember" className="h-4 w-4 rounded border-border" />
+                    <label htmlFor="remember" className="text-sm text-muted-foreground">
+                      Remember me
+                    </label>
+                  </div>
+                  <button type="button" onClick={() => setView("forgot")} className="text-sm text-primary hover:underline font-medium">
+                    Forgot Password?
+                  </button>
+                </div>
+
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Signing In..." : "Sign In"}
+                  {!isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground mt-6">
+                Don't have an account?{" "}
+                <Link href="/auth/signup" className="text-primary hover:underline font-medium">
+                  Create one
                 </Link>
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="mb-8">
+                <h1 className="text-3xl font-bold text-foreground mb-2">Set New Password</h1>
+                <p className="text-muted-foreground">Create a new password for your account.</p>
               </div>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="pl-10 pr-10"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+
+              {/* Forgot Password Form */}
+              <form onSubmit={handleForgotPasswordSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">New Password</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="newPassword"
+                      name="newPassword"
+                      type={showNewPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      className="pl-10 pr-10"
+                    />
+                    <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-3 text-muted-foreground hover:text-foreground">
+                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Confirm New Password</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="confirmNewPassword"
+                      name="confirmNewPassword"
+                      type={showNewPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      value={confirmNewPassword}
+                      onChange={(e) => setConfirmNewPassword(e.target.value)}
+                      className="pl-10 pr-10"
+                    />
+                  </div>
+                </div>
+
+                {forgotPasswordError && <p className="text-sm text-destructive mt-1">{forgotPasswordError}</p>}
+
+                <Button type="submit" className="w-full" disabled={isUpdating}>
+                  {isUpdating ? "Updating..." : "Update Password"}
+                  {!isUpdating && <ArrowRight className="ml-2 h-4 w-4" />}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground mt-6">
+                <button onClick={() => setView("login")} className="text-primary hover:underline font-medium">
+                  Back to Sign In
                 </button>
-              </div>
-              {errors.password && <p className="text-sm text-destructive mt-1">{errors.password}</p>}
-            </div>
-
-            {/* Remember Me */}
-            <div className="flex items-center gap-2">
-              <input type="checkbox" id="remember" className="h-4 w-4 rounded border-border" />
-              <label htmlFor="remember" className="text-sm text-muted-foreground">
-                Remember me
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Signing In..." : "Sign In"}
-              {!isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
-            </Button>
-          </form>
-
-          {/* Sign Up Link */}
-          <p className="text-center text-sm text-muted-foreground mt-6">
-            Don't have an account?{" "}
-            <Link href="/auth/signup" className="text-primary hover:underline font-medium">
-              Create one
-            </Link>
-          </p>
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

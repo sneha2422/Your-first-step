@@ -6,6 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Chrome, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 
 export default function SignupPage() {
@@ -73,10 +74,8 @@ export default function SignupPage() {
         <div className="mx-auto w-full max-w-sm">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">C</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">CareerPath</span>
+            <Image src="/logo.jpg" alt="Your First Step Logo" width={32} height={32} className="rounded-lg" />
+            <span className="text-xl font-bold text-foreground">Your First Step</span>
           </div>
 
           <div className="mb-8">

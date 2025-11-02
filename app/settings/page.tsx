@@ -7,6 +7,7 @@ import { Bell, Lock, User, Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
+import Link from "next/link"
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("profile")
@@ -37,11 +38,11 @@ export default function SettingsPage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleNotificationChange = (key: string) => {
+  const handleNotificationChange = (key: keyof typeof notifications) => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
-  const handlePrivacyChange = (key: string) => {
+  const handlePrivacyChange = (key: keyof typeof privacy) => {
     setPrivacy((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
@@ -50,7 +51,14 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+            <Link href="/dashboard">
+              <Button variant="outline" className="bg-transparent">
+                Back to Dashboard
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -208,7 +216,7 @@ export default function SettingsPage() {
                   <input
                     type="checkbox"
                     checked={notifications[item.key as keyof typeof notifications]}
-                    onChange={() => handleNotificationChange(item.key)}
+                    onChange={() => handleNotificationChange(item.key as keyof typeof notifications)}
                     className="h-5 w-5 rounded border-border"
                   />
                 </div>
@@ -251,7 +259,7 @@ export default function SettingsPage() {
                     <input
                       type="checkbox"
                       checked={privacy[item.key as keyof typeof privacy]}
-                      onChange={() => handlePrivacyChange(item.key)}
+                      onChange={() => handlePrivacyChange(item.key as keyof typeof privacy)}
                       className="h-5 w-5 rounded border-border"
                     />
                   </div>

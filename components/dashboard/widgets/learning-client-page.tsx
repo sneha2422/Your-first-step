@@ -14,6 +14,7 @@ import {
   Zap,
   Award,
   ExternalLink,
+  ArrowLeft,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,6 +23,7 @@ import { useSearchParams } from "next/navigation"
 import {
   Dialog,
   DialogContent,
+  DialogClose,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -29,6 +31,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 
+import Link from "next/link"
 type Course = {
   id: number
   title: string
@@ -1881,131 +1884,22 @@ export default function LearningPageContent() {
     totalHours: Math.round(courses.reduce((sum, c) => sum + (c.progress / 100) * c.hours, 0)),
   }
 
-  const CourseCard = ({ course }: { course: Course }) => (
-    <Card
-      className="overflow-hidden hover:border-primary/50 transition flex flex-col cursor-pointer"
-      onClick={() => openUpdateDialog(course)}
-    >
-      {/* Course Image */}
-      {course.image && (
-        <div className="relative h-40 w-full bg-muted overflow-hidden">
-          <Image
-            src={course.image || "/placeholder.svg"}
-            alt={course.title}
-            fill
-            className="object-cover hover:scale-105 transition-transform"
-          />
-          {course.status === "completed" && (
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <CheckCircle2 className="h-8 w-8 text-primary" />
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Course Header */}
-      <div className="p-6 pb-4 border-b border-border">
-        <div className="flex items-start justify-between mb-3">
-          <div className="inline-block px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-            {course.level}
-          </div>
-          <a
-            href={course.platformUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition"
-            title={`Visit ${course.platform}`}
-          >
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
-        <h3 className="text-lg font-semibold text-foreground mb-2">{course.title}</h3>
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">{course.instructor}</p>
-          <span className="text-xs px-2 py-1 rounded-full bg-muted text-foreground">{course.platform}</span>
-        </div>
-      </div>
-
-      {/* Course Info */}
-      <div className="p-6 space-y-4 flex-1">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            {course.duration}
-          </div>
-          <div className="flex items-center gap-1">
-            <Users className="h-4 w-4" />
-            {course.students?.toLocaleString() || "N/A"}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-3 w-3 ${i < Math.floor(course.rating || 0) ? "fill-primary text-primary" : "text-muted"}`}
-              />
-            ))}
-          </div>
-          <span className="text-xs text-muted-foreground">{course.rating || "N/A"}</span>
-        </div>
-
-        {/* Skills */}
-        <div className="flex flex-wrap gap-1">
-          {course.skills?.map((skill: string) => (
-            <span key={skill} className="px-2 py-1 rounded-full bg-muted text-xs text-foreground">
-              {skill}
-            </span>
-          ))}
-        </div>
-
-        {/* Progress */}
-        {course.progress !== undefined && (
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-foreground">Progress</span>
-              <span className="text-xs text-muted-foreground">{course.progress}%</span>
-            </div>
-            <div className="h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: `${course.progress}%` }}></div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Action Button */}
-      <div className="p-6 pt-4 border-t border-border">
-        <Button className="w-full" asChild>
-          <a href={course.platformUrl} target="_blank" rel="noopener noreferrer">
-            {course.status === "completed" ? (
-              <>
-                <CheckCircle2 className="mr-2 h-4 w-4" />
-                Completed
-              </>
-            ) : course.status === "in-progress" ? (
-              <>
-                <Play className="mr-2 h-4 w-4" />
-                Continue
-              </>
-            ) : (
-              <>
-                <Play className="mr-2 h-4 w-4" />
-                Start Course
-              </>
-            )}
-          </a>
-        </Button>
-      </div>
-    </Card>
-  )
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-foreground mb-6">Learning Hub</h1>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">Learning Hub</h1>
+              <p className="text-muted-foreground mt-1">Your central place for courses and learning paths.</p>
+            </div>
+            <Link href="/dashboard">
+              <Button variant="outline" className="bg-transparent">
+                Back to Dashboard
+              </Button>
+            </Link>
+          </div>
 
           {/* Search */}
           <div className="flex gap-2">
@@ -2106,7 +2000,7 @@ export default function LearningPageContent() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recommendedCourses.map((course) => (
-              <div key={`${course.id}-${course.title}`} className="relative">
+              <Card key={`${course.id}-${course.title}`} className="p-6 flex flex-col justify-between hover:border-primary/50 transition">
                 <CourseCard course={course} />
                 {course.relevance && (
                   <div className="absolute top-4 right-4 z-10 flex items-center gap-1 px-2 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
@@ -2114,7 +2008,7 @@ export default function LearningPageContent() {
                     {course.relevance}% Match
                   </div>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -2166,7 +2060,9 @@ export default function LearningPageContent() {
         {/* Courses Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((course) => (
-            <CourseCard key={`${course.id}-${course.title}`} course={course} />
+            <Card key={`${course.id}-${course.title}`} className="p-6 flex flex-col justify-between hover:border-primary/50 transition">
+              <CourseCard course={course} />
+            </Card>
           ))}
         </div>
 
@@ -2179,5 +2075,82 @@ export default function LearningPageContent() {
         )}
       </div>
     </div>
+  )
+}
+
+const CourseCard = ({ course }: { course: Course }) => {
+  const [isUpdateCourseOpen, setUpdateCourseOpen] = useState(false)
+  const [updatedProgress, setUpdatedProgress] = useState(course.progress)
+
+  const handleUpdateProgress = () => {
+    // In a real app, you'd call an API to save this
+    course.progress = updatedProgress
+    course.status = updatedProgress === 100 ? "completed" : updatedProgress > 0 ? "in-progress" : "not-started"
+    setUpdateCourseOpen(false)
+  }
+
+  return (
+    <>
+      <a href={course.platformUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col justify-between flex-1 group">
+        <div>
+          <div className="flex items-start justify-between mb-3">
+            <div className="inline-block px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+              {course.level}
+            </div>
+            <span className="text-xs px-2 py-1 rounded-full bg-muted text-foreground">{course.platform}</span>
+          </div>
+          <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{course.title}</h3>
+          <p className="text-sm text-muted-foreground mb-4">{course.instructor}</p>
+  
+          <div className="flex flex-wrap gap-1 mb-4">
+            {course.skills?.slice(0, 3).map((skill: string) => (
+              <span key={skill} className="px-2 py-1 rounded-full bg-muted text-xs text-foreground">
+                {skill}
+              </span>
+            ))}
+          </div>
+  
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+            <div className="flex items-center gap-1">
+              <Clock className="h-4 w-4" />
+              {course.duration}
+            </div>
+            <div className="flex items-center gap-1">
+              <Star className="h-4 w-4" />
+              {course.rating || "N/A"}
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <div className="mt-auto pt-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-medium text-foreground">Progress</span>
+            <span className="text-xs text-muted-foreground">{course.progress}%</span>
+          </div>
+          <div className="h-2 rounded-full bg-muted overflow-hidden cursor-pointer" onClick={(e) => {
+            e.stopPropagation();
+            setUpdateCourseOpen(true);
+          }}>
+            <div className="h-full bg-primary" style={{ width: `${course.progress}%` }}></div>
+          </div>
+        </div>
+
+      <Dialog open={isUpdateCourseOpen} onOpenChange={setUpdateCourseOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Update Learning Progress</DialogTitle>
+            <DialogDescription>{course.title}</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <Label htmlFor="progress">Progress: {updatedProgress}%</Label>
+            <Input id="progress" type="range" min="0" max="100" value={updatedProgress} onChange={(e) => setUpdatedProgress(Number(e.target.value))} />
+          </div>
+          <DialogFooter>
+            <Button type="submit" onClick={handleUpdateProgress}>Update Progress</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

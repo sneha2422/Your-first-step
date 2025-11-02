@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import { Search, Briefcase, ArrowRight, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -98,13 +99,22 @@ function JobsPageContent() {
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Live Job Opportunities</h1>
-          <p className="text-muted-foreground">
-            Explore real-time job openings from top platforms, updated continuously.
-          </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">Live Job Opportunities</h1>
+              <p className="text-muted-foreground">
+                Explore real-time job openings from top platforms, updated continuously.
+              </p>
+            </div>
+            <Link href="/dashboard">
+              <Button variant="outline" className="bg-transparent">
+                Back to Dashboard
+              </Button>
+            </Link>
+          </div>
 
           {/* Search Bar */}
-          <div className="flex gap-2 mt-6">
+          <div className="flex gap-2 mt-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input

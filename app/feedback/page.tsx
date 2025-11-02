@@ -19,11 +19,29 @@ export default function FeedbackPage() {
   })
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+
     setSubmitted(true)
+
+    const subject = `Feedback: ${formData.title}`
+    let body = `Feedback Type: ${feedbackType}\n\n`
+    if (feedbackType === "suggestion") {
+      body += `Rating: ${rating}/5\n\n`
+    }
+    body += `Description:\n${formData.description}\n\n`
+    if (formData.email) {
+      body += `From: ${formData.email}`
+    }
+
+    const mailtoLink = `mailto:snehavenkatesh14@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      body,
+    )}`
+
+    setTimeout(() => {
+      window.location.href = mailtoLink
+    }, 500) // Small delay to ensure user sees the message
+
     setTimeout(() => {
       setSubmitted(false)
       setFormData({ title: "", description: "", email: "" })
@@ -39,7 +57,7 @@ export default function FeedbackPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-foreground">Feedback & Suggestions</h1>
-              <p className="text-muted-foreground mt-1">Help us improve CareerPath</p>
+              <p className="text-muted-foreground mt-1">Help us improve Your First Step</p>
             </div>
             <Link href="/dashboard">
               <Button variant="outline" className="bg-transparent">

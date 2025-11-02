@@ -15,19 +15,8 @@ export default function DashboardHeader() {
           </div>
 
           <div className="flex items-center gap-4 ml-auto">
-            {/* Notifications */}
-            <button className="relative p-2 hover:bg-muted rounded-lg transition">
-              <Bell className="h-5 w-5 text-muted-foreground" />
-              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
-            </button>
-
-            {/* Settings */}
-            <button className="p-2 hover:bg-muted rounded-lg transition">
-              <Settings className="h-5 w-5 text-muted-foreground" />
-            </button>
-
             {/* Profile Menu */}
-            <div className="flex items-center gap-3 pl-4 border-l border-border">
+            <div className="flex items-center gap-3">
               <div className="hidden sm:block text-right">
                 <p className="text-sm font-medium text-foreground">{userName}</p>
                 <p className="text-xs text-muted-foreground">{userRole}</p>

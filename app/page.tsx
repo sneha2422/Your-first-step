@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Users, TrendingUp, Zap } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 export default function LandingPage() {
@@ -10,10 +11,8 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">C</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">CareerPath</span>
+              <Image src="/logo.jpg" alt="Your First Step Logo" width={32} height={32} className="rounded-lg" />
+              <span className="text-xl font-bold text-foreground">Your First Step</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition">
@@ -209,7 +208,7 @@ export default function LandingPage() {
       {/* Testimonials */}
       <section id="testimonials" className="border-t border-border px-4 py-20 sm:px-6 lg:px-8 bg-card/50">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16"> 
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Trusted by Professionals</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               See how CareerPath has helped thousands find their ideal career
@@ -264,7 +263,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">Ready to Find Your Perfect Career?</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of professionals who have already discovered their ideal career path with CareerPath.
+            Join thousands of professionals who have already discovered their ideal career path with Your First Step.
           </p>
           <Link href="/auth/signup">
             <Button size="lg">
@@ -281,10 +280,8 @@ export default function LandingPage() {
           <div className="grid gap-8 md:grid-cols-4 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="h-6 w-6 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">C</span>
-                </div>
-                <span className="font-bold text-foreground">CareerPath</span>
+                <Image src="/logo.jpg" alt="Your First Step Logo" width={24} height={24} className="rounded-lg" />
+                <span className="font-bold text-foreground">Your First Step</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Discover your perfect career path with AI-powered insights.
@@ -352,18 +349,8 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="border-t border-border pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-            <p>&copy; 2025 CareerPath. All rights reserved.</p>
-            <div className="flex gap-6 mt-4 sm:mt-0">
-              <a href="#" className="hover:text-foreground transition">
-                Twitter
-              </a>
-              <a href="#" className="hover:text-foreground transition">
-                LinkedIn
-              </a>
-              <a href="#" className="hover:text-foreground transition">
-                GitHub
-              </a>
-            </div>
+            <p>&copy; 2025 Your First Step. All rights reserved.</p>
+            <p className="mt-4 sm:mt-0">Made with ❤️ by Sneha Venkatesh</p>
           </div>
         </div>
       </footer>

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import {
   LayoutDashboard,
   Briefcase,
@@ -42,10 +43,8 @@ export default function DashboardSidebar({ isOpen, onClose }: SidebarProps) {
         <div className="p-6">
           {/* Logo */}
           <div className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">C</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">CareerPath</span>
+            <Image src="/logo.jpg" alt="Your First Step Logo" width={32} height={32} className="rounded-lg" />
+            <span className="text-xl font-bold text-foreground">Your First Step</span>
           </div>
 
           {/* Menu */}
@@ -65,10 +64,13 @@ export default function DashboardSidebar({ isOpen, onClose }: SidebarProps) {
 
           {/* Logout */}
           <div className="absolute bottom-6 left-6 right-6">
-            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition">
+            <Link
+              href="/"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition"
+            >
               <LogOut className="h-5 w-5" />
               <span className="font-medium">Sign Out</span>
-            </button>
+            </Link>
           </div>
         </div>
       </aside>

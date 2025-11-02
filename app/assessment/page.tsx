@@ -823,7 +823,7 @@ const graphicDesignQuestions = [
       "The style and artistic elements",
       "How the product packaging stands out",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 2,
@@ -835,7 +835,7 @@ const graphicDesignQuestions = [
       "Drawing characters or scenes",
       "Designing product labels and packages",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 3,
@@ -847,7 +847,7 @@ const graphicDesignQuestions = [
       "A publishing house or media company",
       "A consumer products company",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 4,
@@ -859,7 +859,7 @@ const graphicDesignQuestions = [
       "Digital illustration and character design",
       "3D modeling and packaging design",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 5,
@@ -871,7 +871,7 @@ const graphicDesignQuestions = [
       "Sketch concepts and gather visual inspiration",
       "Study market trends and competitor products",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 6,
@@ -883,7 +883,7 @@ const graphicDesignQuestions = [
       "Telling stories through visuals",
       "Creating eye-catching product displays",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 7,
@@ -895,7 +895,7 @@ const graphicDesignQuestions = [
       "Drawing or creating artwork",
       "Designing event materials or merchandise",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 8,
@@ -907,7 +907,7 @@ const graphicDesignQuestions = [
       "Creating unique visual styles",
       "Designing sustainable packaging solutions",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 9,
@@ -919,7 +919,7 @@ const graphicDesignQuestions = [
       "Digital painting and illustration software",
       "3D modeling and rendering tools",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
   {
     id: 10,
@@ -931,7 +931,7 @@ const graphicDesignQuestions = [
       "Having others emotionally connect with your artwork",
       "Seeing your design idea come to life as a physical object",
     ],
-    domains: ["BR", "UR", "IL", "ID"],
+    domains: ["BR", "UI", "IL", "ID"],
   },
 ]
 
@@ -1592,6 +1592,8 @@ const quizData = {
     domains: {
       TC_PM: "Technical Product Management",
       CX: "Consumer Product Management",
+      BU: "Business-focused Product Management",
+      ST_PM: "Strategy-focused Product Management",
     },
   },
   "project-management": {
