@@ -1,8 +1,3 @@
-I see you would like a copy-and-paste version of the selected `README.md` content, including all the tables, without the surrounding selection tags.
-
-Here is the complete, ready-to-use Markdown text for your GitHub repository:
-
-```markdown
 # YourFirstStep: A Web-Based Career Guidance and Job Recommendation Platform
 
 **Live Demo:** https://your-first-step.vercel.app/
