@@ -99,4 +99,4 @@ This project is currently a functional MVP (Minimum Viable Product). Future plan
 3. **Personalization & Gamification:** Implement advanced recommendation models and add features like timed challenges and leaderboards to the quiz module.
 
 We welcome feedback and suggestions for improvement!
-```
+
