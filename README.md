@@ -97,6 +97,4 @@ This project is currently a functional MVP (Minimum Viable Product). Future plan
 2. **Real-Time API Grounding:** Integrate external APIs (LinkedIn, JobsPikr) to provide live data for the Market Trends Dashboard.
 
 3. **Personalization & Gamification:** Implement advanced recommendation models and add features like timed challenges and leaderboards to the quiz module.
-
 We welcome feedback and suggestions for improvement!
-
